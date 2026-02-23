@@ -74,6 +74,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 
 ### Planned Improvements
 - [ ] Backend Error Translation
+- [ ] Real-time Quarantine Count Updater
 - [ ] Real Time Scan Path Monitoring Settings
 - [ ] Write the Documentation on the `docs/` folder.
   - [ ] Usage Guide
