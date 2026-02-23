@@ -73,8 +73,10 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 - **Multilingual Support** - Use the ClamAV GUI in your native language besides English
 
 ### Planned Improvements
-- [ ] Backend Error Translation
 - [ ] Real-time Quarantine Count Updater
+- [ ] Icons in Data Table Badges
+- [ ] Improved Theme Colors
+- [ ] Backend Error Translation
 - [ ] Real Time Scan Path Monitoring Settings
 - [ ] Write the Documentation on the `docs/` folder.
   - [ ] Usage Guide
