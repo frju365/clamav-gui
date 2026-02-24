@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## [1.0.1] - Unreleased
+### Improved
+- **History Status Badges** - Added an Icon back
 
 ## [1.0.0] - 2026-02-12 (First Stable Version)
 ### Added

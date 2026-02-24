@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, ArrowUpDown, CheckCircle, Eye, FileText, MoreHorizontal, ScrollText } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Ban, Check, CheckCircle, Eye, FileText, List, MoreHorizontal, ScrollText, TriangleAlert } from "lucide-react";
 import { IHistoryData, HistoryStatus } from "@/lib/types/data";
 import { Badge } from "@/components/ui/badge";
 import { getHistoryStatusBadges } from "@/lib/helpers";
@@ -74,9 +74,19 @@ export const GET_HISTORY_COLS = (
                },
                cell: ({getValue}) => {
                     const {t} = useTranslation("table");
+                    const historyStatus = getValue() as HistoryStatus;
                     return (
-                         <Badge variant={getHistoryStatusBadges(getValue() as HistoryStatus)}>
-                              {t(`status.history.${getValue() as HistoryStatus}`)}
+                         <Badge variant={getHistoryStatusBadges(historyStatus)} className="gap-1.5">
+                              {historyStatus==="success" ? (
+                                   <Check/>
+                              ) : historyStatus === "error" ? (
+                                   <Ban/>
+                              ) : historyStatus === "warning" ? (
+                                   <TriangleAlert/>
+                              ) : (
+                                   <Eye/>
+                              )}
+                              {t(`status.history.${historyStatus}`)}
                          </Badge>
                     )
                }
@@ -116,7 +126,7 @@ export const GET_HISTORY_COLS = (
                                         showDetails: true,
                                         details: item.details
                                    }))}>
-                                        <Eye/>
+                                        <List/>
                                         {t("actions.view-details")}
                                    </DropdownMenuItem>
                                    <DropdownMenuItem disabled={!item.logId || !item.category} asChild>
