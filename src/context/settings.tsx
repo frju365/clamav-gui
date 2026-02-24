@@ -67,7 +67,7 @@ export function useSettings() {
 export function useQuarantineCount() {
      const ctx = useContext(SettingsContext);
      if (!ctx) {
-          throw new Error("useSettings must be used inside SettingsProvider");
+          throw new Error("useQuarantineCount must be used inside SettingsProvider");
      }
      const {increaseQuarantineCountBy, decreaseQuarantineCountBy} = ctx;
      return {
