@@ -6,6 +6,8 @@ import { createContext, useContext, useState } from "react";
 interface SettingsContextValue{
      settings: ISettings,
      setSettings: (overrides: Partial<ISettings>) => void
+     increaseQuarantineCountBy: (count: number) => void
+     decreaseQuarantineCountBy: (count: number) => void
      formatDate: (date?: Date) => string
 }
 const SettingsContext = createContext<SettingsContextValue | null>(null)
