@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Buttons with Loading Status
 ### Changed
 - The **View Details** Icon - Changed back into the List icon
+### Fixed
+- Some Armenian Translation keys
 
 ## [1.0.0] - 2026-02-12 (First Stable Version)
 ### Added
