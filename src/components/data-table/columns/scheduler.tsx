@@ -12,6 +12,7 @@ import { Link } from "react-router";
 import { ISchedulerState } from "@/lib/types/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const GET_SCHEDULER_COLS = (
      setState:  (overrides: Partial<ISchedulerState>) => void,
@@ -31,9 +32,12 @@ export const GET_SCHEDULER_COLS = (
           },
           cell: ({getValue}) => {
                const {t} = useTranslation("table");
+               const {settings} = useSettings();
                return (
                     <Badge>
-                         <CalendarSearch />
+                         {settings.badgeVisibility==="icon-text" && (
+                              <CalendarSearch />
+                         )}
                          {t(`interval.${getValue() as IntervalType}`)}
                     </Badge>
                )
@@ -48,12 +52,26 @@ export const GET_SCHEDULER_COLS = (
           cell: ({getValue}) => {
                const scanInfo = SCAN_TYPES.find(item=>item.type===getValue() as ScanType);
                const {t} = useTranslation("scan");
+               const {settings} = useSettings();
                if(!scanInfo) return null;
                return scanInfo.type!==ScanType.None && (
-                    <Badge variant="outline">
-                         <scanInfo.Icon/>
-                         {t(`scan-type.${scanInfo.type}.name`)}
-                    </Badge>
+                    settings.badgeVisibility==="icon" ? (
+                         <Tooltip>
+                              <TooltipTrigger asChild>
+                                   <scanInfo.Icon/>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                   {t(`scan-type.${scanInfo.type}.name`)}
+                              </TooltipContent>
+                         </Tooltip>
+                    ) : (
+                         <Badge variant="outline">
+                              {settings.badgeVisibility==="icon-text" && (
+                                   <scanInfo.Icon/>
+                              )}
+                              {t(`scan-type.${scanInfo.type}.name`)}
+                         </Badge>
+                    )
                )
           }
      },

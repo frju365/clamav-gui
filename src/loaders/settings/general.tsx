@@ -27,6 +27,7 @@ export default function GeneralSettingsLoader(){
                <SettingsItemLoader className="space-y-4 w-full" noDescription>
                     <SettingsOptionLoader optionType="switch"/>
                     <SettingsOptionLoader optionType="choice" width={105}/>
+                    <SettingsOptionLoader optionType="choice" width={133}/>
                </SettingsItemLoader>
                <SettingsItemLoader className="space-y-4 w-full" noDescription>
                     <SettingsOptionLoader optionType="switch"/>

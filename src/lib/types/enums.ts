@@ -1,4 +1,4 @@
-export enum QuickAccessLink{
+export enum QuickAccessLink {
      MainScan = "main-scan",
      FullScan = "full-scan",
      CustomScan = "custom-scan",
@@ -8,7 +8,7 @@ export enum QuickAccessLink{
      History = "history",
      RealTime = "real-time"
 }
-export enum SidebarLink{
+export enum SidebarLink {
      Overview = "overview",
      Scan = "scan",
      Quarantine = "quarantine",
@@ -18,17 +18,17 @@ export enum SidebarLink{
      Settings = "settings",
      About = "about"
 }
-export enum Indicator{
+export enum Indicator {
      Safe = "safe",
      Warning = "warning",
      Alert = "alert",
 }
-export enum DefinitionStatus{
+export enum DefinitionStatus {
      Updated = "updated",
      Outdated = "outdated",
      Loading = "loading"
 }
-export enum LogCategory{
+export enum LogCategory {
      Scan = "scan",
      Update = "update",
      Quarantine = "quarantine",
@@ -41,17 +41,17 @@ export enum SettingsTab {
      Scan = "scan",
      Update = "update"
 }
-export enum DateFormatType{
+export enum DateFormatType {
      American = "us",
      European = "eu",
      International = "iso"
 }
-export enum ClamAVState{
+export enum ClamAVState {
      Checking = "checking",
      Available = "available",
      Missing = "missing"
 }
-export enum GuiUpdaterStatus{
+export enum GuiUpdaterStatus {
      Checking = "checking",
      Updating = "updating",
      NeedsUpdate = "needs-update",
@@ -60,23 +60,28 @@ export enum GuiUpdaterStatus{
      Completed = "completed",
      UpdateError = "failed-update"
 }
-export enum ScanType{
+export enum ScanType {
      None = "",
      Main = "main",
      Full = "full",
      Custom = "custom",
      File = "file"
 }
-export enum ScanProfiles{
+export enum ScanProfiles {
      Main = "main",
      Custom = "custom",
      File = "file"
 }
-export enum BehaviorMode{
+export enum BehaviorMode {
      Balanced = "balanced",
      Safe = "safe",
      Strict = "strict",
      Expert = "expert"
+}
+export enum BadgeVisibility {
+     Icon = "icon",
+     IconText = "icon-text",
+     Text = "text"
 }
 export enum ScanOptionGroup {
      Detection = "detection",
@@ -86,12 +91,13 @@ export enum ScanOptionGroup {
      Output = "output",
      Advanced = "advanced"
 }
-export enum HistoryClearType{
+export enum HistoryClearType {
      All = "all",
      Acknowledged = "acknowledged",
-     Error = "error"
+     Error = "error",
+     Warning = "warning"
 }
-export enum HistoryType{
+export enum HistoryType {
      RealTimeError = "real-time-error",
      RealTimeStart = "real-time-start",
      RealTimeStop = "real-time-stop",

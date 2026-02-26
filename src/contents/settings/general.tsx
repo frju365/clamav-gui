@@ -3,7 +3,7 @@ import { useTheme } from "@/context/themes";
 import { useSettings } from "@/context/settings";
 import { DATE_TIME_FORMATS, DEFAULT_SETTINGS, THEME_SETTINGS } from "@/lib/constants/settings";
 import { cn } from "@/lib/utils";
-import { Calendar, Palette, Bell } from "lucide-react";
+import { Calendar, Palette, Bell, Type, Star, AArrowUp } from "lucide-react";
 import SettingsItem from "@/components/settings-item";
 import { Switch } from "@/components/ui/switch";
 import { lazy, Suspense } from "react";
@@ -11,6 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {WindowIcon} from "@/components/app-icon";
 import { useTranslation } from "react-i18next";
 import SettingsOption from "@/components/settings-item/settings-option"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { BadgeVisibility } from "@/lib/types/enums";
 
 const LanguageSelector = lazy(()=>import("@/i18n/languages"))
 
@@ -92,6 +94,34 @@ export default function GeneralSettings(){
                          <Suspense fallback={<Skeleton className="h-9 w-32"/>}>
                               <LanguageSelector/>
                          </Suspense>
+                    </SettingsOption>
+                    <SettingsOption
+                         title={t("ui.badge.title")}
+                         description={t("ui.badge.desc")}
+                    >
+                         <Select
+                              defaultValue={settings.badgeVisibility || DEFAULT_SETTINGS.badgeVisibility}
+                              value={settings.badgeVisibility}
+                              onValueChange={value=>setSettings({badgeVisibility: value as BadgeVisibility})}
+                         >
+                              <SelectTrigger>
+                                   <SelectValue placeholder={t("ui.badge.placeholder")}/>
+                              </SelectTrigger>
+                              <SelectContent>
+                                   <SelectItem value="icon">
+                                        <Star/>
+                                        {t("ui.badge.options.icon")}
+                                   </SelectItem>
+                                   <SelectItem value="icon-text">
+                                        <AArrowUp/>
+                                        {t("ui.badge.options.icon-text")}
+                                   </SelectItem>
+                                   <SelectItem value="text">
+                                        <Type/>
+                                        {t("ui.badge.options.text")}
+                                   </SelectItem>
+                              </SelectContent>
+                         </Select>
                     </SettingsOption>
                </SettingsItem>
                <SettingsItem

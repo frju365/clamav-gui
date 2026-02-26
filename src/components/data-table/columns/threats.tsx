@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp, ArrowUpDown, BugOff, FolderOpen, MoreHorizontal, Trash } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Bug, BugOff, FolderOpen, MoreHorizontal, ShieldCheck, Trash } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { IThreatsData, ThreatStatus } from "@/lib/types/data";
@@ -13,6 +13,8 @@ import { IFinishScanState, IScanPageState } from "@/lib/types/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
 import { useQuarantineCount } from "@/context/quarantine-count";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const GET_THREATS_COLS = (
      setScanState: React.Dispatch<React.SetStateAction<IScanPageState>>,
@@ -60,9 +62,34 @@ export const GET_THREATS_COLS = (
                },
                cell: ({getValue}) => {
                     const {t} = useTranslation("table");
-                    return (
-                         <Badge variant={getThreatStatusBadges(getValue() as ThreatStatus)}>
-                              {t(`status.threats.${getValue() as ThreatStatus}`)}
+                    const threatStatus = getValue() as ThreatStatus;
+                    const {settings} = useSettings();
+                    const iconClassName = cn(
+                         threatStatus === "deleted" && "text-primary",
+                         threatStatus === "detected" && "text-destructive",
+                         threatStatus === "quarantined" && "text-muted-foreground",
+                         "text-center"
+                    )
+                    const icon = threatStatus === "deleted" ? (
+                         <ShieldCheck/>
+                    ) : threatStatus === "detected" ? (
+                         <Bug/>
+                    ) : (
+                         <BugOff/>
+                    )
+                    return settings.badgeVisibility === "icon" ? (
+                         <Tooltip>
+                              <TooltipTrigger className={iconClassName} asChild>
+                                   {icon}
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                   {t(`status.threats.${threatStatus}`)}
+                              </TooltipContent>
+                         </Tooltip>
+                    ) : (
+                         <Badge variant={getThreatStatusBadges(threatStatus)} className="gap-1.5">
+                              {settings.badgeVisibility==="icon-text" && icon}
+                              {t(`status.threats.${threatStatus}`)}
                          </Badge>
                     )
                }

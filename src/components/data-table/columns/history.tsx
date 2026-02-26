@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, ArrowUpDown, Ban, Check, CheckCircle, Eye, FileText, List, MoreHorizontal, ScrollText, TriangleAlert } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Ban, Check, CheckCheck, CheckCircle, FileText, List, MoreHorizontal, ScrollText, TriangleAlert } from "lucide-react";
 import { IHistoryData, HistoryStatus } from "@/lib/types/data";
 import { Badge } from "@/components/ui/badge";
 import { getHistoryStatusBadges } from "@/lib/helpers";
@@ -12,6 +12,8 @@ import { IHistoryPageState } from "@/lib/types/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
 import { HistoryType } from "@/lib/types/enums";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const GET_HISTORY_COLS = (
      setHistoryState: React.Dispatch<React.SetStateAction<IHistoryPageState>>,
@@ -75,17 +77,35 @@ export const GET_HISTORY_COLS = (
                cell: ({getValue}) => {
                     const {t} = useTranslation("table");
                     const historyStatus = getValue() as HistoryStatus;
-                    return (
+                    const {settings} = useSettings();
+                    const iconClassName = cn(
+                         historyStatus==="success" && "text-emerald-600 dark:text-emerald-400",
+                         historyStatus === "error" && "text-destructive",
+                         historyStatus === "warning" && "text-amber-600 dark:text-amber-400",
+                         historyStatus === "acknowledged" && "text-muted-foreground",
+                         "text-center"
+                    )
+                    const icon = historyStatus==="success" ? (
+                         <Check/>
+                    ) : historyStatus === "error" ? (
+                         <Ban/>
+                    ) : historyStatus === "warning" ? (
+                         <TriangleAlert/>
+                    ) : (
+                         <CheckCheck/>
+                    )
+                    return settings.badgeVisibility === "icon" ? (
+                         <Tooltip>
+                              <TooltipTrigger className={iconClassName} asChild>
+                                   {icon}
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                   {t(`status.history.${historyStatus}`)}
+                              </TooltipContent>
+                         </Tooltip>
+                    ) : (
                          <Badge variant={getHistoryStatusBadges(historyStatus)} className="gap-1.5">
-                              {historyStatus==="success" ? (
-                                   <Check/>
-                              ) : historyStatus === "error" ? (
-                                   <Ban/>
-                              ) : historyStatus === "warning" ? (
-                                   <TriangleAlert/>
-                              ) : (
-                                   <Eye/>
-                              )}
+                              {settings.badgeVisibility==="icon-text" && icon}
                               {t(`status.history.${historyStatus}`)}
                          </Badge>
                     )
@@ -121,7 +141,7 @@ export const GET_HISTORY_COLS = (
                               <DropdownMenuContent align="end">
                                    <DropdownMenuLabel>{t("heading.actions")}</DropdownMenuLabel>
                                    <DropdownMenuSeparator/>
-                                   <DropdownMenuItem disabled={!item.logId || !item.category} onClick={()=>setHistoryState(prev=>({
+                                   <DropdownMenuItem disabled={!item.logId || !item.category || !item.details} onClick={()=>setHistoryState(prev=>({
                                         ...prev,
                                         showDetails: true,
                                         details: item.details

@@ -1,6 +1,6 @@
 import { LucideProps } from "lucide-react";
 import { SchedulerType } from ".";
-import { ScanProfiles, ScanType } from "./enums";
+import { BadgeVisibility, ScanProfiles, ScanType } from "./enums";
 import { COLORS } from "../constants/colors";
 import { SCAN_SETTINGS } from "../constants/settings/scan-options";
 import { DateFormatType, BehaviorMode } from "./enums";
@@ -47,7 +47,8 @@ export interface ISettings{
      notifOnScanStart: boolean,
      notifOnScanFinish: boolean,
      notifPermitted: boolean,
-     behavior: BehaviorMode
+     behavior: BehaviorMode,
+     badgeVisibility: BadgeVisibility
 }
 export type BackendSettings = {
      scanProfiles: {

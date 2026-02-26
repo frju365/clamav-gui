@@ -51,6 +51,16 @@
           "language": {
                "title": "Language",
                "desc": "The Language of the ClamAV GUI"
+          },
+          "badge": {
+               "title": "Badge Visibility",
+               "desc": "Show icons or text in UI badges",
+               "placeholder": "Select the badge visibility type",
+               "options": {
+                    "icon": "Icon Only",
+                    "icon-text": "Icon and Text",
+                    "text": "Text Only"
+               }
           }
      },
      "notifs": {

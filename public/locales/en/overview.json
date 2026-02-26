@@ -44,5 +44,6 @@
           "updated": "Up to Date",
           "outdated": "Outdated",
           "loading": "Loading..."
-     }
+     },
+     "turn-on-realtime": "Turn on Real Time Scan"
 }

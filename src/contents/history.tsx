@@ -52,7 +52,8 @@ export default function HistoryContent(){
           setState({
                clearAll: false,
                clearAcknowledged: false,
-               clearErrors: false
+               clearErrors: false,
+               clearWarnings: false
           })
           startClearTransition(async()=>{
                try {
@@ -92,7 +93,7 @@ export default function HistoryContent(){
      useEffect(()=>{
           fetchData()
      },[])
-     const {data, clearAcknowledged, clearAll, clearErrors, showDetails, details} = historyState
+     const {data, clearAcknowledged, clearAll, clearErrors, clearWarnings, showDetails, details} = historyState
      const isEmpty = useMemo(()=>data.length<=0,[data])
      return (
           <>
@@ -127,6 +128,9 @@ export default function HistoryContent(){
                                         </DropdownMenuItem>
                                         <DropdownMenuItem onClick={()=>setState({clearErrors: true})} disabled={isEmpty}>
                                              {t("clear.errors")}
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem onClick={()=>setState({clearWarnings: true})} disabled={isEmpty} >
+                                             {t("clear.warnings")}
                                         </DropdownMenuItem>
                                    </DropdownMenuContent>
                               </DropdownMenu>
@@ -166,6 +170,16 @@ export default function HistoryContent(){
                submitTxt={t("confirmation.clear")}
                closeText={t("confirmation.cancel")}
                submitEvent={()=>clearHistory(HistoryClearType.Error)}
+               type="danger"
+          />
+          <Popup
+               open={clearWarnings}
+               onOpen={clearWarnings=>setState({clearWarnings})}
+               title={t("confirmation.clear-warnings.title")}
+               description={t("confirmation.clear-warnings.desc")}
+               submitTxt={t("confirmation.clear")}
+               closeText={t("confirmation.cancel")}
+               submitEvent={()=>clearHistory(HistoryClearType.Warning)}
                type="danger"
           />
           <Popup

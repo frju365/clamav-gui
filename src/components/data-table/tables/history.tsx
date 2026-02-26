@@ -24,7 +24,7 @@ import { IHistoryData, HistoryStatus  } from "@/lib/types/data"
 import { DataTableViewOptions } from "../col-toggle"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { Select, SelectContent, SelectItem, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { CheckCircle, CircleAlert, Eye, Shield, TriangleAlert } from "lucide-react"
+import { CheckCheck, CheckCircle, CircleAlert, Shield, TriangleAlert } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export function HistoryTable({columns,data,headerElement}: DataTableProps<IHistoryData<"state">>) {
@@ -82,7 +82,7 @@ export function HistoryTable({columns,data,headerElement}: DataTableProps<IHisto
               {t("filter.history.error")}
             </SelectItem>
             <SelectItem value="acknowledged">
-              <Eye/>
+              <CheckCheck/>
               {t("filter.history.acknowledged")}
             </SelectItem>
           </SelectContent>

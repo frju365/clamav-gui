@@ -38,6 +38,7 @@ export const INITIAL_HISTORY_STATE: IHistoryPageState = {
      clearAll: false,
      clearAcknowledged: false,
      clearErrors: false,
+     clearWarnings: false,
      showDetails: false,
      details: null,
      data: []

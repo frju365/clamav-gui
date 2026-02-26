@@ -39,6 +39,7 @@ export interface IHistoryPageState{
      clearAll: boolean,
      clearAcknowledged: boolean,
      clearErrors: boolean,
+     clearWarnings: boolean
      showDetails: boolean,
      details: string | null
      data: IHistoryData<"state">[]

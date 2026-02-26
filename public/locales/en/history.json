@@ -9,6 +9,7 @@
           "all": "Clear All",
           "acknowledged": "Clear Acknowledged",
           "errors": "Clear Errors",
+          "warnings": "Clear Warnings",
           "loading": "Clearing..."
      },
      "export": {
@@ -30,12 +31,17 @@
           "clear-errors": {
                "title": "Clear all errors?",
                "desc": "This will remove all errors in the history table. Rest of these events will remain."
+          },
+          "clear-warnings": {
+               "title": "Clear all warnings?",
+               "desc": "This will remove all warnings in the history table. Rest of these events will remain."
           }
      },
      "clear-messages": {
           "all": "History Cleared!",
           "acknowledged": "Acknowledged Entries Cleared!",
-          "error": "All errors Cleared!"
+          "error": "All Errors Cleared!",
+          "warning": "All Warnings Cleared!"
      },
      "events": {
           "real-time-error": "Real-time Scan Failed",

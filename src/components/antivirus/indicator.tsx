@@ -6,6 +6,8 @@ import { formatDistanceToNow } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { useLocale } from "@/i18n/locale";
 import { DefinitionStatus, Indicator } from "@/lib/types/enums";
+import { Button } from "../ui/button";
+import { useSettings } from "@/context/settings";
 
 interface Props{
      type: Indicator
@@ -18,6 +20,7 @@ export default function SafetyIndicator({type, definitionStatus}: Props){
      },[]);
      const {t} = useTranslation("overview");
      const {dateFns} = useLocale()
+     const {setSettings} = useSettings()
      const Icon = type==="safe" ? ShieldCheck : type==="warning" ? ShieldAlert : ShieldClose;
      return (
           <div className={cn(
@@ -31,7 +34,7 @@ export default function SafetyIndicator({type, definitionStatus}: Props){
                ) : (
                     <Icon className={cn("size-24 md:size-48 md:flex-1",type==="safe" && "text-emerald-900 dark:text-emerald-400",type==="alert" && "text-red-900 dark:text-red-400",type==="warning" && "text-amber-900 dark:text-amber-400")}/>
                )}
-               <div className="flex flex-col items-center justify-center gap-2 flex-wrap md:flex-3">
+               <div className="flex flex-col items-center justify-center gap-3 flex-wrap md:flex-3">
                     <h1 className={
                          cn(
                               "text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-medium mt-2 md:mt-0 text-center w-full",
@@ -59,6 +62,11 @@ export default function SafetyIndicator({type, definitionStatus}: Props){
                               })}
                          </li>
                     </ul>
+                    {type==="alert" && (
+                         <Button onClick={()=>setSettings({realTime: true})}>
+                              {t("turn-on-realtime")}
+                         </Button>
+                    )}
                </div>
           </div>
      )

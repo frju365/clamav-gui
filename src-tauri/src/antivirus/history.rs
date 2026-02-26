@@ -109,6 +109,9 @@ pub fn clear_history(app: tauri::AppHandle, mode: ClearHistoryMode) -> Result<()
             ClearHistoryMode::Error => {
                 clear_by_status(&path, |i| i.status != HistoryStatus::Error)?;
             }
+            ClearHistoryMode::Warning => {
+                clear_by_status(&path, |i| i.status != HistoryStatus::Warning)?;
+            }
         }
     }
     Ok(())
