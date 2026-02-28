@@ -216,13 +216,9 @@ pub fn start_custom_scan(
             cmd.arg(path);
         }
         let total_files = estimate_total_files(&resolved_paths);
-        let _ = app_clone
-            .emit("clamscan:total", total_files)
-            .map_err(|e| e.to_string());
+        let _ = app_clone.emit("clamscan:total", total_files).map_err(|e| e.to_string());
         if let Err(e) = run_scan(app_clone.clone(), log_id.clone(), cmd, scan_type) {
-            let _ = app_clone
-                .emit("clamscan:error", &e.to_string())
-                .map_err(|e| e.to_string());
+            let _ = app_clone.emit("clamscan:error", &e.to_string()).map_err(|e| e.to_string());
             log_err(&log_file, &e.to_string());
         }
     });

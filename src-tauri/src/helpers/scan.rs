@@ -85,8 +85,7 @@ pub fn run_scan(
                 if line.contains("FOUND") {
                     threats_clone.fetch_add(1, Ordering::Relaxed);
                 }
-                let _ = app_clone
-                    .emit("clamscan:log", &line)
+                let _ = app_clone.emit("clamscan:log", &line)
                     .map_err(|e| e.to_string());
                 log_info(&log_clone, &line);
             }
@@ -101,8 +100,7 @@ pub fn run_scan(
 
         Some(std::thread::spawn(move || {
             for line in BufReader::new(err).lines().flatten() {
-                let _ = app_clone
-                    .emit("clamscan:log", &line)
+                let _ = app_clone.emit("clamscan:log", &line)
                     .map_err(|e| e.to_string());
                 log_err(&log_clone, &line);
             }

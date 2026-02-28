@@ -54,14 +54,12 @@ pub fn initialize_log_with_id(
 
 pub fn log_err(log: &Arc<Mutex<File>>, msg: &str) {
     if let Ok(mut f) = log.lock() {
-        let _ = writeln!(f, "[{}] [ERROR] {}", chrono::Utc::now().to_rfc3339(), msg)
-            .map_err(|e| e.to_string());
+        let _ = writeln!(f, "[{}] [ERROR] {}", chrono::Utc::now().to_rfc3339(), msg).map_err(|e| e.to_string());
     }
 }
 
 pub fn log_info(log: &Arc<Mutex<File>>, msg: &str) {
     if let Ok(mut f) = log.lock() {
-        let _ =
-            writeln!(f, "[{}] {}", chrono::Utc::now().to_rfc3339(), msg).map_err(|e| e.to_string());
+        let _ = writeln!(f, "[{}] {}", chrono::Utc::now().to_rfc3339(), msg).map_err(|e| e.to_string());
     }
 }

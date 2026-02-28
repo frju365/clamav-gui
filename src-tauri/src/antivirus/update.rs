@@ -55,8 +55,7 @@ pub fn update_definitions(app: tauri::AppHandle) -> Result<(), String> {
                 }
                 if !stderr.is_empty() {
                     let stderr_str = stderr.to_string();
-                    let _ = app
-                        .emit("freshclam:error", &stderr_str)
+                    let _ = app.emit("freshclam:error", &stderr_str)
                         .map_err(|e| e.to_string());
                     log_err(&log_file, &stderr_str);
                 }
@@ -82,14 +81,12 @@ pub fn update_definitions(app: tauri::AppHandle) -> Result<(), String> {
                     },
                     &log_file,
                 );
-                let _ = app
-                    .emit("freshclam:done", exit_code)
+                let _ = app.emit("freshclam:done", exit_code)
                     .map_err(|e| e.to_string());
             }
             Err(e) => {
                 let error_msg = e.to_string();
-                let _ = app
-                    .emit("freshclam:error", &error_msg)
+                let _ = app.emit("freshclam:error", &error_msg)
                     .map_err(|e| e.to_string());
                 log_err(&log_file, &error_msg);
 
