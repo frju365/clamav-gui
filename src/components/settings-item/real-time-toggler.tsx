@@ -1,24 +1,44 @@
 import { useSettings } from "@/context/settings";
 import { Switch } from "../ui/switch";
-import { DEFAULT_SETTINGS } from "@/lib/constants/settings";
 import { useRealtimeScan } from "@/context/real-time";
+import { useState } from "react";
+import Popup from "../popup";
+import { useTranslation } from "react-i18next";
 
 export function RealTimeToggle(){
+     const [isOpen, setIsOpen] = useState(false)
      const { settings, setSettings } = useSettings();
      const {start, stop} = useRealtimeScan()
-     const onToggle = async (enabled: boolean) => {
-          setSettings({realTime: enabled})
+     const handleToggle = async (enabled: boolean) => {
           if (enabled) {
+               setSettings({ realTime: true });
                await start();
           } else {
-               await stop();
+               setIsOpen(true);
           }
      };
+     const confirmDisable = async () => {
+          setIsOpen(false);
+          setSettings({ realTime: false });
+          await stop();
+     };
+     const {t} = useTranslation("settings")
      return (
+          <>
           <Switch
-               defaultChecked={settings.realTime || DEFAULT_SETTINGS.realTime}
                checked={settings.realTime}
-               onCheckedChange={onToggle}
+               onCheckedChange={handleToggle}
           />
+          <Popup
+               open={isOpen}
+               onOpen={setIsOpen}
+               title={t("advanced.real-time-scan.confirmation.title")}
+               description={t("advanced.real-time-scan.confirmation.desc")}
+               submitTxt={t("advanced.real-time-scan.confirmation.turn-off")}
+               submitEvent={confirmDisable}
+               closeText={t("advanced.real-time-scan.confirmation.cancel")}
+               type="danger"
+          />
+          </>
      )
 }

@@ -110,7 +110,13 @@
           },
           "real-time-scan": {
                "title": "Real-Time Scan",
-               "desc": "Automatically scans files when they are created or modified."
+               "desc": "Automatically scans files when they are created or modified.",
+               "confirmation": {
+                    "title": "Are you sure you want to turn off Real-Time Scan?",
+                    "desc": "Disabling real-time protection may expose your device to threats.",
+                    "turn-off": "Turn off",
+                    "cancel": "Cancel"
+               }
           },
           "behavior": {
                "title": "Behavior",
