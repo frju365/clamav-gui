@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Confirmation before disabling the Real Time Scan
 ### Improved
 - The App Background Color to a **Lighter shade** (light mode) and **Darker shade** (dark mode)
+- Colored dark mode icons of the sidebar instead of the white ones
 
 ## [1.0.1] - 2026-02-25
 ### Added

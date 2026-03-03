@@ -1,7 +1,7 @@
 export const COLORS = {
      blue: {
           light: {
-               background: "oklch(0.9801 0.0096 252.81)",
+               background: "oklch(0.9885 0.0054 274.97)",
                foreground: "oklch(0.141 0.005 285.823)",
                card: "oklch(1 0 0)",
                cardForeground: "oklch(0.141 0.005 285.823)",
@@ -70,7 +70,7 @@ export const COLORS = {
      },
      green: {
           light: {
-               background: "oklch(0.9917 0.0074 164.95)",
+               background: "oklch(0.9958 0.0097 125.67)",
                foreground: "oklch(0.141 0.005 285.823)",
                card: "oklch(1 0 0)",
                cardForeground: "oklch(0.141 0.005 285.823)",
@@ -139,7 +139,7 @@ export const COLORS = {
      },
      rose: {
           light: {
-               background: "oklch(0.9892 0.0055 3.33)",
+               background: "oklch(0.9873 0.0069 354.79)",
                foreground: "oklch(0.141 0.005 285.823)",
                card: "oklch(1 0 0)",
                cardForeground: "oklch(0.141 0.005 285.823)",

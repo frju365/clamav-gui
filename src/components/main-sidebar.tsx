@@ -35,7 +35,7 @@ export default function MainSidebar(){
                               {sidebarLinks.map(({Icon,name,href},i)=>(
                                    <SidebarMenuItem key={`${name}-${i}`}>
                                         <SidebarMenuButton isActive={location.pathname===href} asChild>
-                                             <Link to={href} className="text-muted-foreground"><Icon className="text-primary dark:text-accent-foreground"/> {t(`sidebar.${name}`)}</Link>
+                                             <Link to={href} className="text-muted-foreground"><Icon className="text-primary dark:text-chart-1"/> {t(`sidebar.${name}`)}</Link>
                                         </SidebarMenuButton>
                                         {(name===SidebarLink.Quarantine && quarantineCount>0) && (
                                              <SidebarMenuBadge>{quarantineCount}</SidebarMenuBadge>
