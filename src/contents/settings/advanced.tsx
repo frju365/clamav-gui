@@ -238,6 +238,21 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                          )}
                     )}
                </SettingsItem>
+               {isFetching ? (
+                    <FolderPathFormLoader items={paths.length}/>
+               ) : (
+                    <FolderPathForm
+                         title={t("realtime-paths.title")}
+                         description={t("realtime-paths.desc")}
+                         addButtonText={t("realtime-paths.add-button")}
+                         emptyText={t("realtime-paths.no-paths")}
+                         formTitle={t("realtime-paths.form-title")}
+                         confirmationTitle={t("realtime-paths.confirmation")}
+                         data={monitoringPaths}
+                         onSubmit={values=>handlePathAction(values.path,"add")}
+                         onDelete={path=>handlePathAction(path,"remove")}
+                    />
+               )}
                <SettingsItem
                     Icon={Trash2}
                     title={t("danger-zone.title")}
@@ -274,21 +289,6 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                          </LoadingButton>
                     </SettingsOption>
                </SettingsItem>
-               {isFetching ? (
-                    <FolderPathFormLoader items={paths.length}/>
-               ) : (
-                    <FolderPathForm
-                         title={t("realtime-paths.title")}
-                         description={t("realtime-paths.desc")}
-                         addButtonText={t("realtime-paths.add-button")}
-                         emptyText={t("realtime-paths.no-paths")}
-                         formTitle={t("realtime-paths.form-title")}
-                         confirmationTitle={t("realtime-paths.confirmation")}
-                         data={monitoringPaths}
-                         onSubmit={values=>handlePathAction(values.path,"add")}
-                         onDelete={path=>handlePathAction(path,"remove")}
-                    />
-               )}
           </div>
           <Popup
                open={dangerZoneState.isOpenDelete}
