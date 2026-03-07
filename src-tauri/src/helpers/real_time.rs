@@ -22,12 +22,15 @@ static BEHAVIOR: Lazy<Arc<Mutex<BehaviorConfig>>> =
 use crate::{
     antivirus::{quarantine::quarantine_file},
     helpers::{
-        get_exclusions,
+        get_settings_as_array,
         matcher::{EXCLUSIONS, ExclusionMatcher},
         path::{get_clamav_path, path_to_regex},
         silent_command,
     },
-    types::{enums::BehaviorMode, structs::BehaviorConfig},
+    types::{
+        enums::{BehaviorMode, SettingKeyArray},
+        structs::BehaviorConfig
+    },
 };
 
 fn behavior_config(mode: BehaviorMode) -> BehaviorConfig {
@@ -241,7 +244,7 @@ pub fn start_realtime_scan(
     log_id: String,
 ) -> Result<(), String> {
     {
-        let exclusions = get_exclusions(&app)?; // Vec<ExclusionsItem>
+        let exclusions = get_settings_as_array(&app,SettingKeyArray::Exclusions)?;
 
         let patterns: Vec<String> = exclusions
             .into_iter()

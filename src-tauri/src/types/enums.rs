@@ -170,3 +170,18 @@ pub enum RealTimeState{
     Disabled,
     Default
 }
+
+#[derive(Serialize, Deserialize, Type, Debug, PartialEq, Eq, Hash, Copy, Clone)]
+#[serde(rename_all = "camelCase")]
+pub enum SettingKeyArray{
+    Exclusions,
+    MonitoringPaths
+}
+impl SettingKeyArray {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            SettingKeyArray::Exclusions => "exclusions",
+            SettingKeyArray::MonitoringPaths => "monitoringPaths"
+        }
+    }
+}

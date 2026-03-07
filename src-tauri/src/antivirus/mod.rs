@@ -10,13 +10,10 @@ use tauri::command;
 
 use crate::{
     helpers::{
-        history::append_realtime_history,
-        log::{initialize_log, log_err, log_info},
-        new_id,
-        real_time::{start_realtime_scan, stop_realtime_scan},
+        get_settings_as_array, history::append_realtime_history, log::{initialize_log, log_err, log_info}, new_id, real_time::{start_realtime_scan, stop_realtime_scan}
     },
     types::{
-        enums::{BehaviorMode, HistoryDetails, HistoryStatus, HistoryType, LogCategory, ScanType},
+        enums::{BehaviorMode, HistoryDetails, HistoryStatus, HistoryType, LogCategory, ScanType, SettingKeyArray},
         structs::HistoryItem,
     },
 };
@@ -25,9 +22,9 @@ use crate::{
 #[specta(result)]
 pub fn start_real_time_scan(
     app: tauri::AppHandle,
-    paths: Vec<String>,
     behavior: BehaviorMode,
 ) -> Result<(), String> {
+    let paths = get_settings_as_array(&app,SettingKeyArray::MonitoringPaths)?;
     if paths.is_empty() {
         return Err("No paths provided for monitoring".into());
     }

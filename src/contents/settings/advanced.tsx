@@ -1,13 +1,13 @@
 import { SCAN_SETTINGS } from "@/lib/constants/settings/scan-options";
 import { Switch } from "@/components/ui/switch";
 import { useSettings } from "@/context/settings";
-import { DEFAULT_SETTINGS, FILE_SCAN_WHITELIST, MAX_LONG_LINES_CHOICES, SCAN_OPTION_ICON } from "@/lib/constants/settings";
+import { DEFAULT_BACKEND_SETTINGS, DEFAULT_SETTINGS, FILE_SCAN_WHITELIST, MAX_LONG_LINES_CHOICES, SCAN_OPTION_ICON } from "@/lib/constants/settings";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Braces, FlaskConical, RotateCcw, Scale, ScrollText, ShieldAlert, ShieldCheck, Trash2 } from "lucide-react";
 import SettingsItem from "@/components/settings-item";
 import { BehaviorMode } from "@/lib/types/enums";
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useScanProfile } from "@/hooks/use-scan-profile";
 import { SettingsProps } from "@/lib/types/props";
@@ -20,23 +20,53 @@ import { toast } from "sonner";
 import { store } from "@/lib/store";
 import SettingsOption from "@/components/settings-item/settings-option";
 import { useTranslation } from "react-i18next";
-import { ScanOptionKeys } from "@/lib/types/settings";
+import { BackendSettings, ScanOptionKeys } from "@/lib/types/settings";
 import { ObjectEntries } from "@/lib/helpers";
 import { ChoiceOption } from "@/components/settings-item/scan-option";
 import { ActionType } from "@/lib/types";
 import { isDescKey } from "@/lib/helpers/scan";
+import FolderPathFormLoader from "@/components/loaders/path-form";
+import FolderPathForm from "@/components/settings-item/path-form";
+import { useBackendSettings } from "@/hooks/use-settings";
 
 export default function AdvancedSettings({scanProfile}: SettingsProps){
      const {settings, setSettings} = useSettings();
      const { values, setValue, isLoading } = useScanProfile(scanProfile);
      const [isPending, startTransition] = useTransition();
      const [dangerZoneState, setDangerZoneState] = useState<IDangerZoneState>(INITIAL_DANGER_ZONE_STATE);
+
+     const [isFetching, startFetching] = useTransition()
+     const {getSettingsByKey,setSettingsbyKey} = useBackendSettings()
+     const [paths, setPaths] = useState<BackendSettings["monitoringPaths"]>(DEFAULT_BACKEND_SETTINGS.monitoringPaths);
+     const {t: messageTxt} = useTranslation("messages")
+     useEffect(()=>{
+          startFetching(async()=>{
+               try {
+                    const stored = await getSettingsByKey("monitoringPaths")
+                    setPaths(val=>!stored ? val : stored)
+               } catch (err){
+                    toast.error(messageTxt("fetch-error.realtime-paths"),{
+                         description: String(err)
+                    });
+               }
+          })
+     },[])
+     const updatePaths = async(value: BackendSettings["monitoringPaths"]) => {
+          await setSettingsbyKey("monitoringPaths",value);
+          setPaths(value)
+     }
+     const monitoringPaths = useMemo(()=>!paths ? DEFAULT_BACKEND_SETTINGS.monitoringPaths: paths,[paths]);
+     const handlePathAction = async (value: string, action: "add" | "remove") => {
+          if(value.trim()==="") return;
+          const mainArr = !paths ? DEFAULT_BACKEND_SETTINGS.monitoringPaths : paths
+          const newArr = action==="add" ? [...mainArr,value] : mainArr.filter(val=>val!==value)
+          await updatePaths(newArr);
+     }
      const updateState = (overrides: Partial<IDangerZoneState>) => setDangerZoneState(prev=>({...prev,...overrides}));
      const visibleOptions = useMemo(()=>{
           const options = ObjectEntries(SCAN_SETTINGS).filter(([_,option])=>option.group==="advanced");
           return scanProfile === "file" ? options.filter(([k])=>FILE_SCAN_WHITELIST.includes(k as ScanOptionKeys)) : options;
      },[scanProfile])
-     const {t: messageTxt} = useTranslation("messages")
      const handleDangerZoneAction = (type: ActionType) => {
           if (isPending) return;
           updateState({
@@ -244,6 +274,21 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                          </LoadingButton>
                     </SettingsOption>
                </SettingsItem>
+               {isFetching ? (
+                    <FolderPathFormLoader items={paths.length}/>
+               ) : (
+                    <FolderPathForm
+                         title={t("realtime-paths.title")}
+                         description={t("realtime-paths.desc")}
+                         addButtonText={t("realtime-paths.add-button")}
+                         emptyText={t("realtime-paths.no-paths")}
+                         formTitle={t("realtime-paths.form-title")}
+                         confirmationTitle={t("realtime-paths.confirmation")}
+                         data={monitoringPaths}
+                         onSubmit={values=>handlePathAction(values.path,"add")}
+                         onDelete={path=>handlePathAction(path,"remove")}
+                    />
+               )}
           </div>
           <Popup
                open={dangerZoneState.isOpenDelete}

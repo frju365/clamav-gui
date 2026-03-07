@@ -1,5 +1,7 @@
+import { fetchPaths } from "@/lib/helpers/fs";
 import { store } from "@/lib/store";
 import { BackendSettings } from "@/lib/types/settings";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
@@ -53,6 +55,13 @@ export function useBackendSettings(){
                }));
           }
      }
+     useEffect(()=>{
+          (async()=>{
+               const current = (await store.get<BackendSettings["monitoringPaths"]>("monitoringPaths")) ?? [];
+               if(current.length>0) return
+               await store.set("monitoringPaths",await fetchPaths())
+          })()
+     },[])
      return {
           getSettingsBySection,
           getSettingsByKey,

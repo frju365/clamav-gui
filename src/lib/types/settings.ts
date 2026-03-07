@@ -57,4 +57,5 @@ export type BackendSettings = {
           file: ScanProfileValues
      }
      exclusions: string[],
+     monitoringPaths: string[]
 }

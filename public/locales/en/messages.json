@@ -4,9 +4,10 @@
           "error": "Failed to copy the command"
      },
      "fetch-error": {
-          "history": "Failed to fetch the recent history data",
-          "scheduler": "Failed to fetch scheduled scans",
-          "exclusions": "Failed to fetch existing exclusions"
+          "history": "Failed to load the recent history data",
+          "scheduler": "Failed to load scheduled scans",
+          "exclusions": "Failed to load existing exclusions",
+          "realtime-paths": "Failed to load paths for real-time scan"
      },
      "scan-stop-error": "Failed to stop the scan",
      "scan-start-error": "Failed to start the scan",
@@ -88,9 +89,9 @@
                "min": "It should be between 0 and 59 minutes",
                "max": "It is greater than 59 minutes"
           },
-          "exclusion-path": {
-               "required": "The exclusion path is required.",
-               "too-long": "The exclusion path is too long."
+          "directory-path": {
+               "required": "The directory path is required.",
+               "too-long": "The directory path is too long."
           }
      }
 }

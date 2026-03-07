@@ -3,7 +3,7 @@ import { useMemo } from "react";
 interface Props{
      items?: number
 }
-export default function ExclusionsLoader({items = 5}: Props){
+export default function FolderPathFormLoader({items = 5}: Props){
      const range = useMemo(()=>Array.from({length: items}).map((_,i)=>i+1),[items]);
      return (
           <div className="border border-accent animate-pulse flex flex-col gap-4 rounded-xl p-6">

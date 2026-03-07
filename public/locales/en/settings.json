@@ -87,17 +87,25 @@
           "title": "Directory Exclusions",
           "add-button": "Add an exclusion",
           "no-exclusions": "No Folder Exclusions yet",
-          "form": {
-               "title": "Add a Directory to Exclusions",
-               "path": "Directory Path",
-               "browse": "Browse",
-               "add": "Add",
-               "close": "Close"
-          },
+          "form-title": "Add a Directory to Exclusions",
+          "confirmation": "This will remove the directory path from exclusions"
+     },
+     "realtime-paths": {
+          "title": "Real-Time Scan Monitored Paths",
+          "desc": "List of folders currently monitored by a Real-Time scan",
+          "add-button": "Add Path",
+          "no-paths": "No current paths to track",
+          "form-title": "Add a path to track",
+          "confirmation": "This will remove the folder from monitored paths, which may expose the folder to threats."
+     },
+     "folder-path-form": {
+          "path": "Directory Path",
+          "browse": "Browse",
+          "add": "Add",
+          "close": "Close",
           "confirmation": {
-               "title": "This will remove the directory path from exclusions",
                "desc": "Continue?",
-               "remove":"Remove",
+               "remove": "Remove",
                "cancel": "Cancel"
           }
      },

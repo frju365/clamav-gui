@@ -20,6 +20,8 @@ use tauri_plugin_store::StoreExt;
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
 
+use crate::types::enums::SettingKeyArray;
+
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 pub fn silent_command<P: AsRef<std::path::Path>>(program: P) -> Command {
@@ -66,9 +68,9 @@ pub fn resolve_command(command: &str) -> Result<PathBuf, String> {
     Ok(path)
 }
 
-pub fn get_exclusions(app: &tauri::AppHandle) -> Result<Vec<String>, String> {
+pub fn get_settings_as_array(app: &tauri::AppHandle, setting: SettingKeyArray) -> Result<Vec<String>, String> {
     let store = app.store("settings.json").map_err(|e| e.to_string())?;
-    let value = match store.get("exclusions") {
+    let value = match store.get(setting.as_str()) {
         Some(v) => v,
         None => return Ok(vec![]),
     };

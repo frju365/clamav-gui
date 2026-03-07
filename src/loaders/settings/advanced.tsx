@@ -1,3 +1,4 @@
+import FolderPathFormLoader from "@/components/loaders/path-form";
 import SettingsItemLoader from "@/components/loaders/settings-item";
 import SettingsOptionLoader from "@/components/loaders/settings-options";
 import { SCAN_SETTINGS } from "@/lib/constants/settings/scan-options";
@@ -27,6 +28,7 @@ export default function AdvancedSettingsLoader(){
                     <SettingsOptionLoader optionType="choice" width={144}/>
                     <SettingsOptionLoader optionType="choice" width={152}/>
                </SettingsItemLoader>
+               <FolderPathFormLoader/>
           </div>
      )
 }

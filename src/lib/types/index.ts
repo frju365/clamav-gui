@@ -1,7 +1,7 @@
 import * as z from "zod"
 import { LucideProps } from "lucide-react";
 import { SettingsProps } from "./props";
-import { getExclusionsSchema, getSchedulerSchema } from "../schemas";
+import { getPathFormSchema, getSchedulerSchema } from "../schemas";
 import { QuickAccessLink, SettingsTab, SidebarLink, ScanType, BehaviorMode, ScanResult } from "./enums";
 
 export type Mutable<T> = {
@@ -45,7 +45,7 @@ export interface ISpecialThanksItem{
 
 // Schemas
 export type SchedulerType = z.infer<ReturnType<typeof getSchedulerSchema>>
-export type ExclusionsType = z.infer<ReturnType<typeof getExclusionsSchema>>
+export type PathFormType = z.infer<ReturnType<typeof getPathFormSchema>>
 
 export interface IDetailsData {
      "real-time-error": { err: string };

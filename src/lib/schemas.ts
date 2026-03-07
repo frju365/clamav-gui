@@ -9,6 +9,6 @@ export const getSchedulerSchema = (t: TFunction<"messages">) => z.object({
      hours: z.int().min(0,t("form-validations.hours.min")).max(23,t("form-validations.hours.max")),
      minutes: z.int().min(0,t("form-validations.minutes.min")).max(59,t("form-validations.minutes.max"))
 })
-export const getExclusionsSchema = (t: TFunction<"messages">) => z.object({
-     path: z.string().min(1,t("form-validations.exclusion-path.required")).max(300,t("form-validations.exclusion-path.too-long"))
+export const getPathFormSchema = (t: TFunction<"messages">) => z.object({
+     path: z.string().min(1,t("form-validations.directory-path.required")).max(300,t("form-validations.directory-path.too-long"))
 })

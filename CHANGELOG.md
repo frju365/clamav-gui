@@ -7,10 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [1.0.2] - Unreleased
 ### Added
 - **Badge Visibility Settings** - Icon only, Icon and text, and Text only
-- New Clear History Options
-  - Clear All Warnings
+- **New Clear History Option** - Clear All Warnings
 - Button to Enable Real-time protection on the Indicator when its disabled
 - Confirmation before disabling the Real Time Scan
+- Real Time Scan Path Monitoring Settings
 ### Improved
 - The App Background Color to a **Lighter shade** (light mode) and **Darker shade** (dark mode)
 - Colored dark mode icons of the sidebar instead of the white ones

@@ -34,6 +34,7 @@ export const DEFAULT_BACKEND_SETTINGS: BackendSettings = {
           file: {}
      },
      exclusions: [],
+     monitoringPaths: []
 }
 export const FILE_SCAN_WHITELIST: ScanOptionKeys[] = [
      "algorithmicDetection",

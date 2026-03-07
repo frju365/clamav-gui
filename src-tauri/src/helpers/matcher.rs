@@ -6,6 +6,8 @@ use std::{
 use once_cell::sync::Lazy;
 use regex::Regex;
 
+use crate::types::enums::SettingKeyArray;
+
 #[derive(Clone)]
 pub struct ExclusionMatcher {
     pub regexes: Vec<Regex>,
@@ -29,10 +31,10 @@ pub static EXCLUSIONS: Lazy<Arc<Mutex<Option<ExclusionMatcher>>>> =
     Lazy::new(|| Arc::new(Mutex::new(None)));
 
 pub fn apply_exclusions(app: &tauri::AppHandle, args: &mut Vec<String>) -> Result<(), String> {
-    use crate::helpers::get_exclusions;
+    use crate::helpers::get_settings_as_array;
     use crate::helpers::path::path_to_regex;
 
-    let exclusions = get_exclusions(app)?;
+    let exclusions = get_settings_as_array(app,SettingKeyArray::Exclusions)?;
     for item in exclusions.into_iter() {
         let regex = path_to_regex(&item);
         args.push(format!("--exclude-dir={}", regex));

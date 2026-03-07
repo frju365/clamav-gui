@@ -9,10 +9,10 @@ import SettingsItem from "@/components/settings-item";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useScanProfile } from "@/hooks/use-scan-profile";
 import { SettingsProps } from "@/lib/types/props";
-import DirExclusionsItem from "@/components/settings-item/exclusions";
+import FolderPathForm from "@/components/settings-item/path-form";
 import { useBackendSettings } from "@/hooks/use-settings";
 import { BackendSettings } from "@/lib/types/settings";
-import ExclusionsLoader from "@/components/loaders/exclusions";
+import FolderPathFormLoader from "@/components/loaders/path-form";
 import { useTransition, useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import SettingsOption from "@/components/settings-item/settings-option";
@@ -125,9 +125,15 @@ export default function ScanSettings({scanProfile}: SettingsProps){
                     ) : null})
                }
                {isFetching ? (
-                    <ExclusionsLoader items={dirExclusions.length}/>
+                    <FolderPathFormLoader items={dirExclusions.length}/>
                ) : (
-                    <DirExclusionsItem
+                    <FolderPathForm
+                         description="--exclude-dir"
+                         title={t("exclusions.title")}
+                         addButtonText={t("exclusions.add-button")}
+                         emptyText={t("exclusions.no-exclusions")}
+                         formTitle={t("exclusions.form-title")}
+                         confirmationTitle={t("exclusions.confirmation")}
                          data={dirExclusions}
                          onSubmit={values=>handleExclusionAction(values.path,"exclude")}
                          onDelete={path=>handleExclusionAction(path,"remove")}
