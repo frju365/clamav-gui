@@ -73,6 +73,9 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 - **Multilingual Support** - Use the ClamAV GUI in your native language besides English
 
 ### Planned Improvements
+- [ ] Export Settings as JSON
+  - [ ] Frontend Settings
+  - [ ] Backend Settings
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
   - [ ] Clear older than 30 days
