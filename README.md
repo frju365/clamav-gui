@@ -78,7 +78,9 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
   - Backend Settings
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
-  - [ ] Clear older than 30 days
+  - [ ] Clear last 24 hours
+  - [ ] Clear last 7 days
+  - [ ] Clear last 30 days
   - [ ] Clear by date
 - [ ] Write the Documentation on the `docs/` folder.
   - [ ] Usage Guide
