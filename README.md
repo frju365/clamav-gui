@@ -74,8 +74,8 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 
 ### Planned Improvements
 - [ ] Export Settings as JSON
-  - [ ] Frontend Settings
-  - [ ] Backend Settings
+  - Frontend Settings
+  - Backend Settings
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
   - [ ] Clear older than 30 days
