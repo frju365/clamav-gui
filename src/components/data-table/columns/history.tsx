@@ -125,9 +125,9 @@ export const GET_HISTORY_COLS = (
                                    id: item.logId
                               })
                          } catch(err){
-                              toast.error(messageTxt("log-reveal-error",{
+                              toast.error(messageTxt("log-reveal-error"),{
                                    description: String(err)
-                              }));
+                              });
                          }
                     }
                     return (
@@ -186,9 +186,9 @@ export const GET_HISTORY_COLS = (
                          }))
                          toast.success(messageTxt("acknowledge-history.success"))
                     } catch (err){
-                         toast.error(messageTxt("acknowledge-history.error",{
+                         toast.error(messageTxt("acknowledge-history.error"),{
                               description: String(err)
-                         }));
+                         });
                     }
                }
                return (

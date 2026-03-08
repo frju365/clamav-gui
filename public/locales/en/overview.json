@@ -45,5 +45,9 @@
           "outdated": "Outdated",
           "loading": "Loading..."
      },
-     "turn-on-realtime": "Turn on Real Time Scan"
+     "turn-on-realtime": "Turn on Real Time Scan",
+     "dialog-title": {
+          "file": "Choose a file to scan",
+          "folder": "Choose multiple folders to scan"
+     }
 }

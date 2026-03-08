@@ -18,9 +18,12 @@ export default function SettingsLoader({currPage}: Props){
           <>
           <div className="flex justify-between items-center gap-2 w-full">
                <Skeleton className="h-6 md:h-[30px] lg:h-9 w-1/6"/>
-               <div className="flex items-center gap-3">
-                    <Skeleton className="w-[117px] h-3.5"/>
-                    <Skeleton className="w-48 h-9"/>
+               <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
+                         <Skeleton className="w-[117px] h-3.5"/>
+                         <Skeleton className="w-48 h-9"/>
+                    </div>
+                    <Skeleton className="w-[72px] h-9"/>
                </div>
           </div>
           <Skeleton className="h-9 w-full"/>

@@ -89,9 +89,9 @@ export default function UpdateSettings(){
                          const parsed = parseClamVersion(raw);
                          updateVersions(parsed);
                     } catch (err) {
-                         toast.error(messageTxt("def-update-error",{
+                         toast.error(messageTxt("def-update-error"),{
                               description: String(err)
-                         }))
+                         })
                     }
                })
           ];

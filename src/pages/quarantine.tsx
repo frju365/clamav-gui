@@ -49,9 +49,9 @@ export default function QuarantinePage(){
                decreaseBy(1)
                toast.success(messageTxt(`${type}-quarantine.success`));
           } catch (err){
-               toast.error(messageTxt(`${type}-quarantine.error`,{
+               toast.error(messageTxt(`${type}-quarantine.error`),{
                     description: String(err)
-               }));
+               });
           } finally {
                setState({
                     isOpenRestore: false,
@@ -71,9 +71,9 @@ export default function QuarantinePage(){
                setState({ data: [] })
                toast.success(messageTxt(`bulk-${type}-quarantine.success`));
           } catch (err){
-               toast.error(messageTxt(`bulk-${type}-quarantine.error`,{
+               toast.error(messageTxt(`bulk-${type}-quarantine.error`),{
                     description: String(err)
-               }));
+               });
           }
      }
      const {isOpenDelete, isOpenRestore, bulkDelete, bulkRestore, data} = quarantineState

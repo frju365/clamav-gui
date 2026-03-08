@@ -125,9 +125,9 @@ export const GET_SCHEDULER_COLS = (
                               id: item.log_id
                          })
                     } catch(err){
-                         toast.error(messageTxt("log-reveal-error",{
+                         toast.error(messageTxt("log-reveal-error"),{
                               description: String(err)
-                         }));
+                         });
                     }
                }
                const handleRunScan = async()=>{
@@ -137,9 +137,9 @@ export const GET_SCHEDULER_COLS = (
                          });
                          toast.success(messageTxt("trigger-scan.success"))
                     } catch (err){
-                         toast.error(messageTxt("trigger-scan.error",{
+                         toast.error(messageTxt("trigger-scan.error"),{
                               description: String(err)
-                         }));
+                         });
                     }
                }
                return (

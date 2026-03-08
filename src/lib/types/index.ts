@@ -66,6 +66,9 @@ export interface IDetailsData {
      "file-delete": { file_path: string };
      "file-delete-error": { err: string; file_path: string };
 }
-
-export type HistoryDetails =
-     { [K in keyof IDetailsData]: { type: K; details: IDetailsData[K] } }[keyof IDetailsData];
+export type HistoryDetails = {
+     [K in keyof IDetailsData]: {
+          type: K;
+          details: IDetailsData[K]
+     }
+}[keyof IDetailsData];

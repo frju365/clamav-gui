@@ -11,7 +11,7 @@ import { useScanProfile } from "@/hooks/use-scan-profile";
 import { SettingsProps } from "@/lib/types/props";
 import FolderPathForm from "@/components/settings-item/path-form";
 import { useBackendSettings } from "@/hooks/use-settings";
-import { BackendSettings } from "@/lib/types/settings";
+import { IBackendSettings } from "@/lib/types/settings";
 import FolderPathFormLoader from "@/components/loaders/path-form";
 import { useTransition, useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
@@ -25,7 +25,7 @@ export default function ScanSettings({scanProfile}: SettingsProps){
      const { values, setValue, isLoading } = useScanProfile(scanProfile);
      const [isFetching, startTransition] = useTransition()
      const {getSettingsByKey,setSettingsbyKey} = useBackendSettings()
-     const [exclusions, setExclusions] = useState<BackendSettings["exclusions"]>(DEFAULT_BACKEND_SETTINGS.exclusions);
+     const [exclusions, setExclusions] = useState<IBackendSettings["exclusions"]>(DEFAULT_BACKEND_SETTINGS.exclusions);
      const {t: messageTxt} = useTranslation("messages")
      useEffect(()=>{
           startTransition(async()=>{
@@ -33,13 +33,13 @@ export default function ScanSettings({scanProfile}: SettingsProps){
                     const stored = await getSettingsByKey("exclusions")
                     setExclusions(val=>!stored ? val : stored)
                } catch (err){
-                    toast.error(messageTxt("fetch-error.exclusions",{
+                    toast.error(messageTxt("fetch-error.exclusions"),{
                          description: String(err)
-                    }));
+                    });
                }
           })
      },[])
-     const updateExclusions = async(value: BackendSettings["exclusions"]) => {
+     const updateExclusions = async(value: IBackendSettings["exclusions"]) => {
           await setSettingsbyKey("exclusions",value);
           setExclusions(value)
      }

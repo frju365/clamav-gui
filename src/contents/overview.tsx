@@ -17,6 +17,7 @@ export default function OverviewContent(){
      const [definitionStatus, setDefinitionStatus] = useState<DefinitionStatus>(DefinitionStatus.Loading)
      const openCustomScan = async(href: string, type: FsOption) => {
           const currPath = await open({
+               title: t(`dialog-title.${type}`),
                multiple: type==="folder",
                directory: type==="folder",
           });

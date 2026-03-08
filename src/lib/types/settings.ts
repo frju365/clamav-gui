@@ -1,6 +1,6 @@
 import { LucideProps } from "lucide-react";
 import { SchedulerType } from ".";
-import { BadgeVisibility, ScanProfiles, ScanType } from "./enums";
+import { BadgeVisibility, ScanProfile, ScanType } from "./enums";
 import { COLORS } from "../constants/colors";
 import { SCAN_SETTINGS } from "../constants/settings/scan-options";
 import { DateFormatType, BehaviorMode } from "./enums";
@@ -41,7 +41,7 @@ export interface ISettings{
      confirmStopScan: boolean,
      autoScrollText: boolean,
      maxLogLines: number,
-     currScanProfile: ScanProfiles,
+     currScanProfile: ScanProfile,
      realTime: boolean,
      enableSchedulerUI: boolean,
      notifOnScanStart: boolean,
@@ -50,12 +50,15 @@ export interface ISettings{
      behavior: BehaviorMode,
      badgeVisibility: BadgeVisibility
 }
-export type BackendSettings = {
-     scanProfiles: {
-          main: ScanProfileValues,
-          custom: ScanProfileValues,
-          file: ScanProfileValues
-     }
+export type ScanProfilesType = Record<ScanProfile,ScanProfileValues>
+export interface IBackendSettings{
+     scanProfiles: ScanProfilesType
      exclusions: string[],
      monitoringPaths: string[]
+}
+export interface ISettingsMetadata{
+     name: string,
+     version: string,
+     frontend: ISettings,
+     backend: IBackendSettings
 }

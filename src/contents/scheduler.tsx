@@ -35,9 +35,9 @@ export default function SchedulerContent(){
                          days: values.days || DAYS_OF_THE_WEEK[currDay]
                     })
                } catch (err) {
-                    toast.error(messageTxt("schedule-scan-error",{
+                    toast.error(messageTxt("schedule-scan-error"),{
                          description: String(err)
-                    }));
+                    });
                }
           })
      }
@@ -57,9 +57,9 @@ export default function SchedulerContent(){
                     }))
                     toast.success(messageTxt("remove-job.success"))
                } catch (err){
-                    toast.error(messageTxt("remove-job.error",{
+                    toast.error(messageTxt("remove-job.error"),{
                          description: String(err)
-                    }));
+                    });
                }
           })
      }
@@ -72,9 +72,9 @@ export default function SchedulerContent(){
                     setState(INITIAL_SCHEDULER_STATE)
                     toast.success(messageTxt("clear-jobs.success"))
                } catch (err){
-                    toast.error(messageTxt("clear-jobs.error",{
+                    toast.error(messageTxt("clear-jobs.error"),{
                          description: String(err)
-                    }));
+                    });
                }
           })
      }
@@ -106,9 +106,9 @@ export default function SchedulerContent(){
                     })
                     setState({data: newData})
                } catch (err){
-                    toast.error(messageTxt("fetch-error.scheduler",{
+                    toast.error(messageTxt("fetch-error.scheduler"),{
                          description: String(err)
-                    }));
+                    });
                     setState({data: []})
                }
           })

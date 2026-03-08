@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { store } from "@/lib/store";
 import SettingsOption from "@/components/settings-item/settings-option";
 import { useTranslation } from "react-i18next";
-import { BackendSettings, ScanOptionKeys } from "@/lib/types/settings";
+import { IBackendSettings, ScanOptionKeys } from "@/lib/types/settings";
 import { ObjectEntries } from "@/lib/helpers";
 import { ChoiceOption } from "@/components/settings-item/scan-option";
 import { ActionType } from "@/lib/types";
@@ -37,7 +37,7 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
 
      const [isFetching, startFetching] = useTransition()
      const {getSettingsByKey,setSettingsbyKey} = useBackendSettings()
-     const [paths, setPaths] = useState<BackendSettings["monitoringPaths"]>(DEFAULT_BACKEND_SETTINGS.monitoringPaths);
+     const [paths, setPaths] = useState<IBackendSettings["monitoringPaths"]>(DEFAULT_BACKEND_SETTINGS.monitoringPaths);
      const {t: messageTxt} = useTranslation("messages")
      useEffect(()=>{
           startFetching(async()=>{
@@ -51,7 +51,7 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                }
           })
      },[])
-     const updatePaths = async(value: BackendSettings["monitoringPaths"]) => {
+     const updatePaths = async(value: IBackendSettings["monitoringPaths"]) => {
           await setSettingsbyKey("monitoringPaths",value);
           setPaths(value)
      }
@@ -83,9 +83,9 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                     setSettings(DEFAULT_SETTINGS);
                     toast.success(messageTxt(`${type}-settings.success`));
                } catch(err){
-                    toast.error(messageTxt(`${type}-settings.error`,{
+                    toast.error(messageTxt(`${type}-settings.error`),{
                          description: String(err)
-                    }));
+                    });
                }
           })
      }

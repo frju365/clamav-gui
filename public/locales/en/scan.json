@@ -1,6 +1,10 @@
 {
      "title": "Scan",
      "scan-complete": "Scan Completed!",
+     "dialog-title": {
+          "file": "Choose a file to scan",
+          "folder": "Choose multiple folders to scan"
+     },
      "scan-type": {
           "title": "Scan Type: {{scanType}}",
           "main": {

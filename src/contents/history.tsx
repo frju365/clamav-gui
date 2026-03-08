@@ -9,7 +9,7 @@ import { Download, Trash2 } from "lucide-react"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { save } from '@tauri-apps/plugin-dialog';
+import { save } from "@tauri-apps/plugin-dialog";
 import { exportCSV, exportJSON } from "@/lib/helpers/fs";
 import Popup from "@/components/popup";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -41,9 +41,9 @@ export default function HistoryContent(){
                     }))
                     setState({ data: newData })
                } catch (err){
-                    toast.error(messageTxt("fetch-error.history",{
+                    toast.error(messageTxt("fetch-error.history"),{
                          description: String(err)
-                    }))
+                    })
                     setState({ data: [] })
                }
           })
@@ -64,9 +64,9 @@ export default function HistoryContent(){
                     }))
                     toast.success(t(`clear-messages.${mode}`))
                } catch (err){
-                    toast.error(messageTxt("history-clear-errror",{
+                    toast.error(messageTxt("history-clear-errror"),{
                          description: String(err)
-                    }))
+                    })
                }
           })
      }
@@ -86,9 +86,9 @@ export default function HistoryContent(){
                     fileName: path.endsWith(".csv") ? t("export.csv") : t("export.json")
                }))
           } catch (err) {
-               toast.error(messageTxt("export.error",{
+               toast.error(messageTxt("export.error"),{
                     description: String(err)
-               }));
+               });
           }
      }
      useEffect(()=>{

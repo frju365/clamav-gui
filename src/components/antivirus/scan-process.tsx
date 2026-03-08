@@ -39,9 +39,9 @@ export default function ScanProcess({scanState, handleReset, isStartup}: Props){
                     navigate("/scan");
                }
           } catch (err){
-               toast.error(messageTxt("scan-stop-error",{
+               toast.error(messageTxt("scan-stop-error"),{
                     description: String(err)
-               }));
+               });
                navigate("/scan");
           }
      }

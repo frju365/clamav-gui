@@ -1,12 +1,12 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { ScanProfiles } from "./enums"
+import { ScanProfile } from "./enums"
 import { TFunction } from "i18next"
 
 export interface TableLoaderProps{
      rows: number
 }
 export interface SettingsProps{
-     scanProfile: ScanProfiles
+     scanProfile: ScanProfile
 }
 export interface RealTimeChartProps{
      t: TFunction<"stats">

@@ -43,9 +43,9 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                }))
                toast.success(messageTxt("threat-deleted.success"))
           } catch (err){
-               toast.error(messageTxt("threat-deleted.error",{
+               toast.error(messageTxt("threat-deleted.error"),{
                     description: String(err)
-               }));
+               });
           } finally {
                setState(INITIAL_FINISH_SCAN_STATE)
           }
@@ -63,8 +63,10 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                          threats: prev.threats.map(t =>t.status === "detected" ? { ...t, status: "quarantined" } : t)
                     }))
                     toast.success(messageTxt("threat-quarantined.success"));
-               } catch {
-                    toast.error(messageTxt("threat-quarantined.error"));
+               } catch (err) {
+                    toast.error(messageTxt("threat-quarantined.error"),{
+                         description: String(err)
+                    });
                }
           })
      }
@@ -81,8 +83,10 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                          threats: prev.threats.map(t =>t.status === "detected" ? { ...t, status: "deleted" } : t)
                     }))
                     toast.success(messageTxt("threat-bulk-delete.success"));
-               } catch {
-                    toast.error(messageTxt("threat-bulk-delete.error"));
+               } catch (err) {
+                    toast.error(messageTxt("threat-bulk-delete.error"),{
+                         description: String(err)
+                    });
                } 
           })
      }

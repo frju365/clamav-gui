@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { cn } from "@/lib/utils";
 import { CheckCircle, FilePlus, FolderPlus, Search } from "lucide-react";
-import { open } from '@tauri-apps/plugin-dialog';
+import { open } from "@tauri-apps/plugin-dialog";
 import { normalizePaths } from "@/lib/helpers";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ export default function ScanMenuContent(){
           paths: [],
           scanType: ScanType.None
      });
+     const {t} = useTranslation("scan");
      const hasPath = path.paths.every(p=>p!== "") && path.scanType===currScanType;
      const isFile = currScanType === "file";
      const isCustom = currScanType === "custom";
@@ -30,6 +31,7 @@ export default function ScanMenuContent(){
      };
      const openDialog = async (type: FsOption) =>{
           const currPath = await open({
+               title: t(`dialog-title.${type}`),
                multiple: type==="folder",
                directory: type==='folder',
           });
@@ -48,8 +50,6 @@ export default function ScanMenuContent(){
                params.append("path",path);
           navigate(`${type}?${params.toString()}`)
      }
-     const {t} = useTranslation("scan");
-     
      return (
           <>
                <h1 className="text-2xl md:text-3xl font-medium border-b pb-2 w-fit">{t("title")}</h1>

@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import ScanFinishResult from "@/components/antivirus/finish-scan";
 import LogText from "@/components/log";
 import { GET_INITIAL_SCAN_STATE } from "@/lib/constants/states";
-import { ScanType, ScanProfiles } from "@/lib/types/enums";
+import { ScanType, ScanProfile } from "@/lib/types/enums";
 import { IScanPageState } from "@/lib/types/states";
 import { invoke } from "@tauri-apps/api/core";
 import { listen, UnlistenFn } from "@tauri-apps/api/event";
@@ -42,10 +42,10 @@ export default function ScanPage(){
                let scanOptions: ScanProfileValues | null = null;
                const isMainOrFull = scanState.scanType==="main" || scanState.scanType === "full";
                const scanCommand = `start_${isMainOrFull ? scanState.scanType : "custom"}_scan`;
-               const scanProfile: ScanProfiles | null =
-                    scanState.scanType==="main" ? ScanProfiles.Main :
-                    scanState.scanType==="custom" ? ScanProfiles.Custom :
-                    scanState.scanType==="file" ? ScanProfiles.File : null;
+               const scanProfile: ScanProfile | null =
+                    scanState.scanType==="main" ? ScanProfile.Main :
+                    scanState.scanType==="custom" ? ScanProfile.Custom :
+                    scanState.scanType==="file" ? ScanProfile.File : null;
                if(scanProfile){
                     const availableOptions = await getSettingsBySection("scanProfiles",scanProfile);
                     if(availableOptions) scanOptions = hydrateProfile(availableOptions,scanProfile==="file");

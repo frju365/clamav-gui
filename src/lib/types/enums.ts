@@ -67,7 +67,7 @@ export enum ScanType {
      Custom = "custom",
      File = "file"
 }
-export enum ScanProfiles {
+export enum ScanProfile {
      Main = "main",
      Custom = "custom",
      File = "file"

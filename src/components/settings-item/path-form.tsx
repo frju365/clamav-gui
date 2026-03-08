@@ -28,6 +28,7 @@ export default function FolderPathForm({data, onSubmit, onDelete, title, addButt
      const [isOpen, setIsOpen] = useState(false);
      const [isOpenDelete, setIsOpenDelete] = useState(false)
      const [currPath, setCurrPath] = useState("")
+     const {t} = useTranslation("settings")
      const {t: validationMsg} = useTranslation("messages")
      const form = useForm<PathFormType>({
           resolver: zodResolver(getPathFormSchema(validationMsg)),
@@ -40,13 +41,13 @@ export default function FolderPathForm({data, onSubmit, onDelete, title, addButt
      }
      const handleBrowse = async() => {
           const path = await open({
+               title: t("folder-path-form.dialog-title"),
                multiple: false,
                directory: true
           });
           if(!path) return;
           form.setValue("path",path)
      }
-     const {t} = useTranslation("settings")
      return (
           <>
           <SettingsItem

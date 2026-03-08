@@ -1,5 +1,19 @@
 {
      "title": "Settings",
+     "json-settings": "JSON Settings",
+     "export": {
+          "button-title": "Export Settings",
+          "title": "Export ClamAV GUI Settings",
+          "success": "Settings exported sucessfully",
+          "error": "Failed to export settings"
+     },
+     "import": {
+          "button-title": "Import Settings",
+          "title": "Import ClamAV GUI Settings",
+          "empty-content": "Looks like the settings content is mostly empty",
+          "success": "Settings imported successfully",
+          "error": "Failed to import settings"
+     },
      "scan-profile": {
           "title": "Active Scan Profile",
           "main": "Main Scan",
@@ -107,7 +121,8 @@
                "desc": "Continue?",
                "remove": "Remove",
                "cancel": "Cancel"
-          }
+          },
+          "dialog-title": "Choose a folder path to add"
      },
      "advanced": {
           "title": "Advanced GUI Options",

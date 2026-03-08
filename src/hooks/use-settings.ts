@@ -1,6 +1,6 @@
 import { fetchPaths } from "@/lib/helpers/fs";
 import { store } from "@/lib/store";
-import { BackendSettings } from "@/lib/types/settings";
+import { IBackendSettings } from "@/lib/types/settings";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -8,56 +8,56 @@ import { toast } from "sonner";
 export function useBackendSettings(){
      const {t: messageTxt} = useTranslation("messages")
      async function getSettingsBySection<
-          S extends keyof BackendSettings,
-          K extends keyof BackendSettings[S]
+          S extends keyof IBackendSettings,
+          K extends keyof IBackendSettings[S]
      >(
           section: S,
           key: K
-     ): Promise<BackendSettings[S][K] | undefined> {
-          const data = await store.get<BackendSettings[S]>(section);
+     ): Promise<IBackendSettings[S][K] | undefined> {
+          const data = await store.get<IBackendSettings[S]>(section);
           return data?.[key];
      }
-     async function fetchSettingsbySection<S extends keyof BackendSettings>(section: S): Promise<BackendSettings[S] | undefined> {
-          const data = await store.get<BackendSettings[S]>(section);
+     async function fetchSettingsbySection<S extends keyof IBackendSettings>(section: S): Promise<IBackendSettings[S] | undefined> {
+          const data = await store.get<IBackendSettings[S]>(section);
           return data;
      }
      async function setSettingsbySection<
-          S extends keyof BackendSettings,
-          K extends keyof BackendSettings[S]
+          S extends keyof IBackendSettings,
+          K extends keyof IBackendSettings[S]
      >(
           section: S,
           key: K,
-          value: BackendSettings[S][K]
+          value: IBackendSettings[S][K]
      ) {
           try{
-               const current = (await store.get<BackendSettings[S]>(section)) ?? {};
+               const current = (await store.get<IBackendSettings[S]>(section)) ?? {};
                await store.set(section, {
                     ...current,
                     [key]: value,
                });
           } catch(err){
-               toast.error(messageTxt("save-settings-error",{
+               toast.error(messageTxt("save-settings-error"),{
                     description: String(err)
-               }));
+               });
           }
      }
-     async function getSettingsByKey<K extends keyof BackendSettings>(key: K): Promise<BackendSettings[K] | undefined> {
-          const data = await store.get<BackendSettings[K]>(key);
+     async function getSettingsByKey<K extends keyof IBackendSettings>(key: K): Promise<IBackendSettings[K] | undefined> {
+          const data = await store.get<IBackendSettings[K]>(key);
           return data;
      }
-     async function setSettingsbyKey<K extends keyof BackendSettings>(key: K,value: BackendSettings[K]) {
+     async function setSettingsbyKey<K extends keyof IBackendSettings>(key: K,value: IBackendSettings[K]) {
           try{
-               const current = await store.get<BackendSettings[K]>(key)
+               const current = await store.get<IBackendSettings[K]>(key)
                await store.set(key,!value ? current : value);
           } catch(err){
-               toast.error(messageTxt("save-settings-error",{
+               toast.error(messageTxt("save-settings-error"),{
                     description: String(err)
-               }));
+               });
           }
      }
      useEffect(()=>{
           (async()=>{
-               const current = (await store.get<BackendSettings["monitoringPaths"]>("monitoringPaths")) ?? [];
+               const current = (await store.get<string[]>("monitoringPaths")) ?? [];
                if(current.length>0) return
                await store.set("monitoringPaths",await fetchPaths())
           })()
