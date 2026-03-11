@@ -52,8 +52,8 @@ export function useGuiUpdater(){
                try {
                     const update = await check();
                     if(update){
+                         ["clamav","settings-tab","clamav-version","versions"].map(val=>localStorage.removeItem(val))
                          let downloaded = 0, contentLength = 0;
-                         localStorage.removeItem("clamav")
                          await update.downloadAndInstall((event) => {
                               switch (event.event) {
                                    case 'Started':

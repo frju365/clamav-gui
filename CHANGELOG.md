@@ -10,8 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Translations to every dialog titles
 ### Fixed
 - Error toast description bug
-### Experimental
-- An updater bug fix
+- A bug after finishing the update (Experimental)
 
 ## [1.0.2] - 2026-03-07
 ### Added
