@@ -75,6 +75,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 ### Planned Improvements
 - [X] Export Settings as JSON
 - [X] Import Settings from JSON
+- [ ] Random Emoji Images on the "No ClamAV" Page after loading
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
   - [ ] Clear last 24 hours
