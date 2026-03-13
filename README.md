@@ -88,8 +88,8 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
   - [ ] Troubleshooting
   - [ ] FAQs
 - [ ] Limit `helpers::scheduler::windows::get_last_run_time` only for Windows Users
+- [ ] Replace the Update release notes part of the updater with a Changelog shortcut button
 - [ ] Bug Fixes
-  - [ ] Fix the Update release notes part of the updater
   - [X] Fix the No ClamAV Page appearing after a GUI Update (Experimental)
   - [ ] Fix the ARM64 build workflow
 - [ ] Scheduler support for Linux and MacOS
