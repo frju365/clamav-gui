@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 import { HistoryClearType } from "@/lib/types/enums"
 import { translateDetails } from "@/lib/helpers/history";
 import LoadingButton from "@/components/loading-button";
-import ConfirmationMessage from "@/components/confirmation";
+import ConfirmationMessage from "@/components/popup/confirm";
 import { HistoryConfirmationState } from "@/lib/types";
 
 export default function HistoryContent(){
@@ -51,7 +51,7 @@ export default function HistoryContent(){
           })
      }
      const clearHistory = (mode = HistoryClearType.All) => {
-          setState({popupState: ""})
+          if (isClearing) return;
           startClearTransition(async()=>{
                try {
                     await invoke("clear_history",{mode});
@@ -64,6 +64,8 @@ export default function HistoryContent(){
                     toast.error(messageTxt("history-clear-errror"),{
                          description: String(err)
                     })
+               } finally {
+                    setState({popupState: ""})
                }
           })
      }

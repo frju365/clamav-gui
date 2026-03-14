@@ -11,8 +11,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Fixed
 - Error toast description bug
 - A bug after finishing the update (Experimental)
-### Changed
-- Replaced the Update Release Notes Part of the updater with a Changelog shortcut button
+### Replaced
+- The Update Release Notes Part of the updater with a Changelog shortcut button
 ### Improved
 - **Emoji on the *"No ClamAV"* Page** - Now uses 3 emojis with a random image loader
 - Popup placements if it has over 2 Popup placements (Experimental)

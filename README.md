@@ -80,6 +80,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
   - [X] Fix the No ClamAV Page appearing after a GUI Update (Experimental)
 - [X] Random Emoji Images on the "No ClamAV" Page after loading
 - [X] Optimize Popup placements if it has over 2 Popup placements
+- [ ] The "Acknowledge All" Button on the History Page
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
   - [ ] Clear last 24 hours

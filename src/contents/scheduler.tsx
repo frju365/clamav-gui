@@ -16,7 +16,7 @@ import { ISchedulerState } from "@/lib/types/states";
 import { INITIAL_SCHEDULER_STATE } from "@/lib/constants/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
-import ConfirmationMessage from "@/components/confirmation";
+import ConfirmationMessage from "@/components/popup/confirm";
 
 export default function SchedulerContent(){
      const {settings} = useSettings();
@@ -42,8 +42,7 @@ export default function SchedulerContent(){
           })
      }
      const handleRemoveJob = () => {
-          if(!settings.enableSchedulerUI) return;
-          setState({popupState: ""})
+          if(!settings.enableSchedulerUI || isPending) return;
           startTransition(async()=>{
                if(!schedulerState.job_id) return;
                try{
@@ -60,12 +59,13 @@ export default function SchedulerContent(){
                     toast.error(messageTxt("remove-job.error"),{
                          description: String(err)
                     });
+               } finally {
+                    setState({popupState: ""})
                }
           })
      }
      const handleClear = () => {
-          if(!settings.enableSchedulerUI) return;
-          setState({popupState: ""})
+          if(!settings.enableSchedulerUI || isPending) return;
           startTransition(async() => {
                try {
                     await invoke("clear_scheduled_jobs");
@@ -75,6 +75,8 @@ export default function SchedulerContent(){
                     toast.error(messageTxt("clear-jobs.error"),{
                          description: String(err)
                     });
+               } finally {
+                    setState({popupState: ""})
                }
           })
      }

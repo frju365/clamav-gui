@@ -1,6 +1,6 @@
 import { DangerZoneConfState, DesignType, HistoryConfirmationState, QuarantineConfirmationState, ScanFinishConfState, SchedulerConfState } from "@/lib/types"
 import { useTranslation } from "react-i18next"
-import Popup from "./popup"
+import Popup from "@/components/popup"
 
 type ConfirmationType = "" | HistoryConfirmationState | QuarantineConfirmationState | DangerZoneConfState | ScanFinishConfState | SchedulerConfState
 
@@ -20,12 +20,13 @@ export default function ConfirmationMessage({
      onOpenChange
 }: ConfirmationMessageProps){
      const {t} = useTranslation("confirmation")
+     if (state==="") return null
      return (
           <Popup
-               open={state!==""}
+               open
                onOpen={(open)=>onOpenChange(open ? state : "")}
-               title={state==="" ? "" : t(`${state}.title`)}
-               description={state==="" ? undefined : t(`${state}.desc`)}
+               title={t(`${state}.title`)}
+               description={t(`${state}.desc`)}
                submitTxt={submitAction==="" ? undefined : t(`actions.${submitAction}`)}
                closeText={t("actions.cancel")}
                submitEvent={submitEvent}

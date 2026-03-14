@@ -13,7 +13,7 @@ import { GET_QUARANTINE_COLS } from "@/components/data-table/columns/quarantine"
 import { ActionType, QuarantineConfirmationState } from "@/lib/types";
 import { useTranslation } from "react-i18next";
 import { useQuarantineCount } from "@/context/quarantine-count";
-import ConfirmationMessage from "@/components/confirmation";
+import ConfirmationMessage from "@/components/popup/confirm";
 const QuarantineTable = lazy(()=>import("@/contents/quarantine"))
 
 export default function QuarantinePage(){

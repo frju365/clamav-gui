@@ -14,7 +14,7 @@ import { INITIAL_FINISH_SCAN_STATE } from "@/lib/constants/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
 import { useQuarantineCount } from "@/context/quarantine-count";
-import ConfirmationMessage from "@/components/confirmation";
+import ConfirmationMessage from "@/components/popup/confirm";
 import { ScanFinishConfState } from "@/lib/types";
 
 interface Props{
@@ -72,7 +72,7 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
           })
      }
      const handleBulkDelete = () => {
-          setState({popupState: ""})
+          if(isPending) return;
           startTransition(async()=>{
                try {
                     const paths = scanState.threats
@@ -88,7 +88,9 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                     toast.error(messageTxt("threat-bulk-delete.error"),{
                          description: String(err)
                     });
-               } 
+               } finally {
+                    setState({popupState: ""})
+               }
           })
      }
      const {exitCode, threats, duration} = scanState;

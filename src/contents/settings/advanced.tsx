@@ -25,7 +25,7 @@ import { isDescKey } from "@/lib/helpers/scan";
 import FolderPathFormLoader from "@/components/loaders/path-form";
 import FolderPathForm from "@/components/settings-item/path-form";
 import { useBackendSettings } from "@/hooks/use-settings";
-import ConfirmationMessage from "@/components/confirmation";
+import ConfirmationMessage from "@/components/popup/confirm";
 
 export default function AdvancedSettings({scanProfile}: SettingsProps){
      const {settings, setSettings} = useSettings();
@@ -65,7 +65,6 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
      },[scanProfile])
      const handleDangerZoneAction = (type: ActionType) => {
           if (isPending) return;
-          setPopupState("")
           startTransition(async()=>{
                try {
                     if(type==="restore"){
@@ -79,6 +78,8 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                     toast.error(messageTxt(`${type}-settings.error`),{
                          description: String(err)
                     });
+               } finally {
+                    setPopupState("")
                }
           })
      }
