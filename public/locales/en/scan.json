@@ -40,18 +40,10 @@
      },
      "stop-scan": "Stop the Scan",
      "confirmation": {
-          "title": {
-               "delete": "Are you sure to delete this file permanently?",
-               "clear": "Are you sure to delete all detected threats?",
-               "stop-scan": "Are you sure to stop the {{scanName}}?"
-          },
-          "desc": {
-               "stop-scan": "This will cancel all the scan process and return to the scan options menu.",
-               "action-undone": "The process can't be undone."
-          },
+          "title": "Are you sure to stop the {{scanName}}?",
+          "desc": "This will cancel all the scan process and return to the scan options menu.",
           "stop": "Stop",
-          "cancel": "Cancel",
-          "delete": "Delete"
+          "cancel": "Cancel"
      },
      "full-scan-warn": "Full scans may take a while depending on disk size.",
      "start-scan": "Start Scanning",

@@ -40,17 +40,5 @@
                "original": "Schedule"
           },
           "scheduled-time": "Scheduled Time: {{time}}"
-     },
-     "confirmation": {
-          "cancel": "Cancel",
-          "continue": "Continue?",
-          "remove": {
-               "title": "This will remove the selected scheduled scan job",
-               "button": "Remove Job"
-          },
-          "clear": {
-               "title": "This will remove all scheduled scan jobs",
-               "button": "Clear Jobs"
-          }
      }
 }

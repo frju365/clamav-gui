@@ -14,6 +14,7 @@ import about from "@i18n/en/about.json"
 import credits from "@i18n/en/credits.json"
 import messages from "@i18n/en/messages.json"
 import noClamAvPage from "@i18n/en/no-clamav-page.json"
+import confirmation from "@i18n/en/confirmation.json"
 
 import { LangCode } from "../i18n/config";
 
@@ -36,6 +37,7 @@ declare module "i18next" {
                credits: typeof credits;
                messages: typeof messages;
                "no-clamav-page": typeof noClamAvPage;
+               confirmation: typeof confirmation
           };
      }
 }

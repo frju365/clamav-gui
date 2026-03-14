@@ -124,8 +124,8 @@ export default function ScanProcess({scanState, handleReset, isStartup}: Props){
                <Popup
                     open={isOpen}
                     onOpen={setIsOpen}
-                    title={t("confirmation.title.stop-scan",{scanName: scanType!=="" ? t(`scan-type.${scanType}.name`) : ""})}
-                    description={t("confirmation.desc.stop-scan")}
+                    title={t("confirmation.title",{scanName: scanType!=="" ? t(`scan-type.${scanType}.name`) : ""})}
+                    description={t("confirmation.desc")}
                     submitTxt={t("confirmation.stop")}
                     closeText={t("confirmation.cancel")}
                     submitEvent={handleStopScan}

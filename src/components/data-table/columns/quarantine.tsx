@@ -89,14 +89,14 @@ export const GET_QUARANTINE_COLS = (
                                    {}
                                    <DropdownMenuItem onClick={()=>setState({
                                         id: threat.id,
-                                        isOpenRestore: true
+                                        popupState: "restore"
                                    })}>
                                         <RotateCcw/>
                                         {t("actions.restore")}
                                    </DropdownMenuItem>
                                    <DropdownMenuItem className="text-destructive" onClick={()=>setState({
                                         id: threat.id,
-                                        isOpenDelete: true
+                                        popupState: "delete"
                                    })}>
                                         <Trash className="text-destructive"/>
                                         {t("actions.delete")}

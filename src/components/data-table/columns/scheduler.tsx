@@ -168,7 +168,7 @@ export const GET_SCHEDULER_COLS = (
                                    {t("actions.reveal-log")}
                               </DropdownMenuItem>
                               <DropdownMenuItem className="text-destructive" onClick={()=>setState({
-                                   isOpenDelete: true,
+                                   popupState: "delete-job",
                                    job_id: item.id
                               })}>
                                    <Trash2 className="text-destructive"/>

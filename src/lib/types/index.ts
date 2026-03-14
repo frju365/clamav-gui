@@ -72,3 +72,10 @@ export type HistoryDetails = {
           details: IDetailsData[K]
      }
 }[keyof IDetailsData];
+
+// Confirmation Message Boxes
+export type HistoryConfirmationState = "clear-all" | "clear-acknowledged" | "clear-errors" | "clear-warnings"
+export type QuarantineConfirmationState = "bulk-restore" | "bulk-delete" | "restore" | "delete"
+export type DangerZoneConfState = "delete-settings" | "restore-defaults"
+export type ScanFinishConfState = "delete-threats" | "clear-threats"
+export type SchedulerConfState = "delete-job" | "clear-jobs"

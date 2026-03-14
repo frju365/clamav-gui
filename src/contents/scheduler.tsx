@@ -1,6 +1,6 @@
 import { SchedulerTable } from "@/components/data-table/tables/scheduler";
 import SchedulerForm from "@/components/antivirus/scheduler-form";
-import { SchedulerType } from "@/lib/types";
+import { SchedulerConfState, SchedulerType } from "@/lib/types";
 import { useEffect, useState, useTransition } from "react";
 import { ISchedulerData } from "@/lib/types/data";
 import { GET_SCHEDULER_COLS } from "@/components/data-table/columns/scheduler";
@@ -11,12 +11,12 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { RotateCw, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Popup from "@/components/popup";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { ISchedulerState } from "@/lib/types/states";
 import { INITIAL_SCHEDULER_STATE } from "@/lib/constants/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
+import ConfirmationMessage from "@/components/confirmation";
 
 export default function SchedulerContent(){
      const {settings} = useSettings();
@@ -43,7 +43,7 @@ export default function SchedulerContent(){
      }
      const handleRemoveJob = () => {
           if(!settings.enableSchedulerUI) return;
-          setState({isOpenDelete: false})
+          setState({popupState: ""})
           startTransition(async()=>{
                if(!schedulerState.job_id) return;
                try{
@@ -65,7 +65,7 @@ export default function SchedulerContent(){
      }
      const handleClear = () => {
           if(!settings.enableSchedulerUI) return;
-          setState({isOpenClear: false});
+          setState({popupState: ""})
           startTransition(async() => {
                try {
                     await invoke("clear_scheduled_jobs");
@@ -113,6 +113,13 @@ export default function SchedulerContent(){
                }
           })
      }
+     const ACTIONS = {
+          "delete-job": handleRemoveJob,
+          "clear-jobs": handleClear
+     } as const
+     const handleConfirm = () => {
+          if(schedulerState.popupState) ACTIONS[schedulerState.popupState]()
+     }
      useEffect(()=>{
           if(!settings.enableSchedulerUI) return;
           const unsubs: Promise<UnlistenFn>[] = [
@@ -144,7 +151,7 @@ export default function SchedulerContent(){
                Promise.all(unsubs).then(fns=>fns.forEach(f=>f()))
           }
      },[])
-     const {data,isOpenClear,isOpenDelete} = schedulerState
+     const {data,popupState} = schedulerState
      const {t} = useTranslation("scheduler")
      return !settings.enableSchedulerUI ? null : (
           <>
@@ -156,7 +163,7 @@ export default function SchedulerContent(){
                               <RotateCw className={cn(isPending && "animate-spin")}/>
                               {isPending ? t("refresh.loading") : t("refresh.original")}
                          </Button>
-                         <Button variant="outline" disabled={isPending || !data.length || isSubmitting} onClick={()=>setState({isOpenClear: true})}>
+                         <Button variant="outline" disabled={isPending || !data.length || isSubmitting} onClick={()=>setState({popupState: "clear-jobs"})}>
                               <Trash2/>
                               {t("clear-jobs")}
                          </Button>
@@ -170,25 +177,12 @@ export default function SchedulerContent(){
                handleSubmit={handleSchedule}
                isSubmitting={isSubmitting}
           />
-          <Popup
-               open={isOpenDelete}
-               onOpen={isOpenDelete=>setState({isOpenDelete})}
-               title={t("confirmation.remove.title")}
-               description={t("confirmation.continue")}
-               submitTxt={t("confirmation.remove.button")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={handleRemoveJob}
+          <ConfirmationMessage
+               state={popupState}
+               submitAction={popupState==="clear-jobs" ? "clear-jobs" : "delete-job"}
+               submitEvent={handleConfirm}
                type="danger"
-          />
-          <Popup
-               open={isOpenClear}
-               onOpen={isOpenClear=>setState({isOpenClear})}
-               title={t("confirmation.clear.title")}
-               description={t("confirmation.continue")}
-               submitTxt={t("confirmation.clear.button")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={handleClear}
-               type="danger"
+               onOpenChange={(state)=>setState({ popupState: state as "" | SchedulerConfState})}
           />
           </>
      )

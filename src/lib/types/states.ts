@@ -1,6 +1,7 @@
 import { ScanType } from "./enums";
 import { IHistoryData, IQuarantineData, ISchedulerData, IThreatsData } from "./data"
 import { GuiUpdaterStatus } from "./enums";
+import { HistoryConfirmationState, QuarantineConfirmationState, ScanFinishConfState, SchedulerConfState } from ".";
 
 export interface IDeviceInfo {
      sys_name: string;
@@ -32,29 +33,21 @@ export interface IDefsUpdaterState{
 }
 export interface IFinishScanState{
      currThreat: IThreatsData | null,
-     isOpenDelete: boolean,
-     bulkDelete: boolean
+     popupState: ScanFinishConfState | ""
 }
 export interface IHistoryPageState{
-     clearAll: boolean,
-     clearAcknowledged: boolean,
-     clearErrors: boolean,
-     clearWarnings: boolean
+     popupState: "" | HistoryConfirmationState
      showDetails: boolean,
      details: string | null
      data: IHistoryData<"state">[]
 }
 export interface IQuarantineState{
-     bulkRestore: boolean,
-     bulkDelete: boolean,
-     isOpenRestore: boolean,
-     isOpenDelete: boolean,
+     popupState: "" | QuarantineConfirmationState
      id: string,
      data: IQuarantineData[]
 }
 export interface ISchedulerState{
-     isOpenDelete: boolean,
-     isOpenClear: boolean,
+     popupState: SchedulerConfState | ""
      job_id: string,
      data: ISchedulerData<"state">[]
 }
@@ -64,8 +57,4 @@ export interface IUpdaterState{
      patchDate: Date | null,
      downloaded: number,
      total: number
-}
-export interface IDangerZoneState{
-     isOpenDelete: boolean,
-     isOpenRestore: boolean
 }

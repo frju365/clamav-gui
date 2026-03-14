@@ -172,17 +172,13 @@
           "delete": {
                "title": "Delete Settings (Permanent)",
                "desc": "This will clear all settings data",
-               "confirmation": "This will permanently delete all ClamAV GUI settings, exclusions, and preferences.",
                "button": "Delete Settings"
           },
           "restore": {
                "title": "Restore Defaults",
                "desc": "This will reset all settings into default values",
-               "confirmation": "This will permanently restore all ClamAV GUI settings, exclusions, and preferences into default values.",
                "button": "Restore Defaults"
           },
-          "continue": "Continue?",
-          "cancel": "Cancel",
           "pending": "Please wait..."
      }
 }

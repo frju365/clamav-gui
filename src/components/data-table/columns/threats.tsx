@@ -139,7 +139,7 @@ export const GET_THREATS_COLS = (
                                         {t("actions.quarantine")}
                                    </DropdownMenuItem>
                                    <DropdownMenuItem className="text-destructive" onClick={()=>setState({
-                                        isOpenDelete: true,
+                                        popupState: "delete-threats",
                                         currThreat: threat
                                    })} disabled={isResolved} >
                                         <Trash className="text-destructive"/> {t("actions.delete")}

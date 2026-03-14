@@ -3,7 +3,6 @@ import { ShieldCheck } from "lucide-react"
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { lazy, Suspense, useEffect, useMemo, useState, useTransition } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import Popup from "@/components/popup";
 import { toast } from "sonner";
 import { IQuarantineState } from "@/lib/types/states";
 import { INITIAL_QUARANTINE_STATE } from "@/lib/constants/states";
@@ -11,9 +10,10 @@ import QuarantineLoader from "@/loaders/quarantine";
 import { IQuarantineData } from "@/lib/types/data";
 import { useSettings } from "@/context/settings";
 import { GET_QUARANTINE_COLS } from "@/components/data-table/columns/quarantine";
-import { ActionType } from "@/lib/types";
+import { ActionType, QuarantineConfirmationState } from "@/lib/types";
 import { useTranslation } from "react-i18next";
 import { useQuarantineCount } from "@/context/quarantine-count";
+import ConfirmationMessage from "@/components/confirmation";
 const QuarantineTable = lazy(()=>import("@/contents/quarantine"))
 
 export default function QuarantinePage(){
@@ -54,8 +54,7 @@ export default function QuarantinePage(){
                });
           } finally {
                setState({
-                    isOpenRestore: false,
-                    isOpenDelete: false,
+                    popupState: "",
                     id: ""
                })
           }
@@ -76,9 +75,19 @@ export default function QuarantinePage(){
                });
           }
      }
-     const {isOpenDelete, isOpenRestore, bulkDelete, bulkRestore, data} = quarantineState
+     const CLEAR_ACTIONS = {
+          "bulk-restore": () => bulkAction("restore"),
+          "bulk-delete": () => bulkAction("delete"),
+          "restore": () => quarantineAction("restore"),
+          "delete": () => quarantineAction("delete"),
+     } as const
+     const handleConfirm = () => {
+          if(popupState) CLEAR_ACTIONS[popupState]()
+     }
+     const {popupState, data} = quarantineState
      const isNotEmpty = useMemo(()=>data.length>0,[data]);
      const {t} = useTranslation("quarantine")
+     const isRestoreAction = useMemo(()=>popupState==="restore" || popupState==="bulk-restore",[popupState])
      return (
           <AppLayout className="flex justify-center items-center gap-4 flex-col p-4">
                <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium border-b pb-2 w-fit">{t("title")}</h1>
@@ -88,8 +97,8 @@ export default function QuarantinePage(){
                               data={data}
                               isRefreshing={isRefreshing}
                               onRefresh={fetchData}
-                              onBulkClear={()=>setState({ bulkDelete: true })}
-                              onBulkRestore={()=>setState({ bulkRestore: true })}
+                              onBulkClear={()=>setState({ popupState: "bulk-delete" })}
+                              onBulkRestore={()=>setState({ popupState: "bulk-restore" })}
                               columns={GET_QUARANTINE_COLS(setState,settings.developerMode)}
                          />
                     </Suspense>
@@ -104,43 +113,12 @@ export default function QuarantinePage(){
                          </EmptyHeader>
                     </Empty>
                )}
-               <Popup
-                    open={isOpenRestore}
-                    onOpen={isOpenRestore=>setState({isOpenRestore})}
-                    title={t("confirmation.title.restore")}
-                    description={t("confirmation.desc.continue")}
-                    submitTxt={t("confirmation.restore")}
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={()=>quarantineAction("restore")}
-               />
-               <Popup
-                    open={isOpenDelete}
-                    onOpen={isOpenDelete=>setState({isOpenDelete})}
-                    title={t("confirmation.title.delete")}
-                    description={t("confirmation.desc.action-undone")}
-                    submitTxt={t("confirmation.delete")}
-                    type="danger"
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={()=>quarantineAction("delete")}
-               />
-               <Popup
-                    open={bulkDelete}
-                    onOpen={bulkDelete=>setState({bulkDelete})}
-                    title={t("confirmation.title.bulk-delete")}
-                    description={t("confirmation.desc.action-undone")}
-                    submitTxt={t("confirmation.delete")}
-                    type="danger"
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={()=>bulkAction("delete")}
-               />
-               <Popup
-                    open={bulkRestore}
-                    onOpen={bulkRestore=>setState({bulkRestore})}
-                    title={t("confirmation.title.bulk-restore")}
-                    description={t("confirmation.desc.continue")}
-                    submitTxt={t("confirmation.restore")}
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={()=>bulkAction("restore")}
+               <ConfirmationMessage
+                    state={popupState}
+                    submitAction={isRestoreAction ? "restore" : "delete"}
+                    submitEvent={handleConfirm}
+                    type={isRestoreAction ? "default" : "danger"}
+                    onOpenChange={(state)=>setState({ popupState: state as "" | QuarantineConfirmationState })}
                />
           </AppLayout>
      )

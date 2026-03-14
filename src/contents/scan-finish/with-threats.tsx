@@ -5,7 +5,6 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { GET_THREATS_COLS } from "@/components/data-table/columns/threats";
 import { useMemo, useTransition } from "react";
-import Popup from "@/components/popup";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
 import LoadingButton from "@/components/loading-button";
@@ -15,6 +14,8 @@ import { INITIAL_FINISH_SCAN_STATE } from "@/lib/constants/states";
 import { useSettings } from "@/context/settings";
 import { useTranslation } from "react-i18next";
 import { useQuarantineCount } from "@/context/quarantine-count";
+import ConfirmationMessage from "@/components/confirmation";
+import { ScanFinishConfState } from "@/lib/types";
 
 interface Props{
      setScanState: React.Dispatch<React.SetStateAction<IScanPageState>>,
@@ -71,7 +72,7 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
           })
      }
      const handleBulkDelete = () => {
-          setState({bulkDelete: false})
+          setState({popupState: ""})
           startTransition(async()=>{
                try {
                     const paths = scanState.threats
@@ -92,9 +93,16 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
      }
      const {exitCode, threats, duration} = scanState;
      const isResolved = useMemo(() =>threats.some(t =>["quarantined", "deleted"].includes(t.status)),[threats]);
-     const {isOpenDelete, bulkDelete} = finishScanState;
+     const {popupState} = finishScanState;
      const {t} = useTranslation("scan");
      const exitCodes = t("exit-code",{returnObjects: true})
+     const ACTIONS = {
+          "delete-threats": handleDelete,
+          "clear-threats": handleBulkDelete
+     } as const
+     const handleConfirm = async() => {
+          if(popupState) await ACTIONS[popupState]()
+     }
      return (
           <>
                <ShieldAlert className="size-32 text-destructive"/>
@@ -119,7 +127,7 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                               <DropdownMenuItem onClick={handleBulkQuarantine}>
                                    <BugOff/> {t("resolve.quarantine")}
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-destructive" onClick={()=>setState({bulkDelete: true})}>
+                              <DropdownMenuItem className="text-destructive" onClick={()=>setState({popupState: "clear-threats"})}>
                                    <Trash className="text-destructive"/> {t("resolve.delete")}
                               </DropdownMenuItem>
                          </DropdownMenuContent>
@@ -133,25 +141,12 @@ export default function ScanFinishedTable({setScanState, isStartup, scanState, h
                     msg: exitCodes[exitCode] ?? t("exit-code-fallback"),
                     exitCode
                })}</p>
-               <Popup
-                    open={isOpenDelete}
-                    onOpen={isOpenDelete=>setState({isOpenDelete})}
-                    title={t("confirmation.title.delete")}
-                    description={t("confirmation.desc.action-undone")}
-                    submitTxt={t("confirmation.delete")}
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={handleDelete}
+               <ConfirmationMessage
+                    state={popupState}
+                    submitAction={popupState==="clear-threats" ? "clear" : "delete"}
+                    submitEvent={handleConfirm}
                     type="danger"
-               />
-               <Popup
-                    open={bulkDelete}
-                    onOpen={bulkDelete=>setState({bulkDelete})}
-                    title={t("confirmation.title.clear")}
-                    description={t("confirmation.desc.action-undone")}
-                    submitTxt={t("confirmation.delete")}
-                    closeText={t("confirmation.cancel")}
-                    submitEvent={handleBulkDelete}
-                    type="danger"
+                    onOpenChange={(state)=>setState({ popupState: state as "" | ScanFinishConfState})}
                />
           </>
      )

@@ -1,5 +1,5 @@
 import { GuiUpdaterStatus, ScanType } from "../types/enums";
-import { IDeviceInfo, IFinishScanState, IHistoryPageState, IQuarantineState, IScanPageState, ISchedulerState, IDefsUpdaterState, IUpdaterState, IVersion, IDangerZoneState } from "../types/states";
+import { IDeviceInfo, IFinishScanState, IHistoryPageState, IQuarantineState, IScanPageState, ISchedulerState, IDefsUpdaterState, IUpdaterState, IVersion } from "../types/states";
 
 export const INITIAL_DEIVCE_INFO: IDeviceInfo = {
      sys_os: "",
@@ -31,42 +31,28 @@ export const INITIAL_DEF_UPDATE_STATE: IDefsUpdaterState = {
 }
 export const INITIAL_FINISH_SCAN_STATE: IFinishScanState = {
      currThreat: null,
-     isOpenDelete: false,
-     bulkDelete: false
+     popupState: ""
 }
 export const INITIAL_HISTORY_STATE: IHistoryPageState = {
-     clearAll: false,
-     clearAcknowledged: false,
-     clearErrors: false,
-     clearWarnings: false,
+     popupState: "",
      showDetails: false,
      details: null,
      data: []
 }
 export const INITIAL_QUARANTINE_STATE: IQuarantineState = {
-     isOpenRestore: false,
-     isOpenDelete: false,
+     popupState: "",
      id: "",
-     bulkDelete: false,
-     bulkRestore: false,
      data: []
 }
 export const INITIAL_SCHEDULER_STATE: ISchedulerState = {
-     isOpenDelete: false,
-     isOpenClear: false,
+     popupState: "",
      job_id: "",
      data: []
 }
 export const INITIAL_UPDATER_STATE: IUpdaterState = {
      status: GuiUpdaterStatus.Checking,
-     notes: null,
      newVersion: null,
      patchDate: null,
-     isOpenNotes: false,
      downloaded: 0,
      total: 0
-}
-export const INITIAL_DANGER_ZONE_STATE: IDangerZoneState = {
-     isOpenDelete: false,
-     isOpenRestore: false,
 }

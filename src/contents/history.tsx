@@ -20,6 +20,8 @@ import { useTranslation } from "react-i18next";
 import { HistoryClearType } from "@/lib/types/enums"
 import { translateDetails } from "@/lib/helpers/history";
 import LoadingButton from "@/components/loading-button";
+import ConfirmationMessage from "@/components/confirmation";
+import { HistoryConfirmationState } from "@/lib/types";
 
 export default function HistoryContent(){
      const {settings} = useSettings();
@@ -49,12 +51,7 @@ export default function HistoryContent(){
           })
      }
      const clearHistory = (mode = HistoryClearType.All) => {
-          setState({
-               clearAll: false,
-               clearAcknowledged: false,
-               clearErrors: false,
-               clearWarnings: false
-          })
+          setState({popupState: ""})
           startClearTransition(async()=>{
                try {
                     await invoke("clear_history",{mode});
@@ -91,10 +88,19 @@ export default function HistoryContent(){
                });
           }
      }
+     const CLEAR_ACTIONS = {
+          "clear-all": () => clearHistory(HistoryClearType.All),
+          "clear-acknowledged": () => clearHistory(HistoryClearType.Acknowledged),
+          "clear-errors": () => clearHistory(HistoryClearType.Error),
+          "clear-warnings": () => clearHistory(HistoryClearType.Warning),
+     } as const
+     const handleConfirm = () => {
+          if(popupState) CLEAR_ACTIONS[popupState]()
+     }
      useEffect(()=>{
           fetchData()
      },[])
-     const {data, clearAcknowledged, clearAll, clearErrors, clearWarnings, showDetails, details} = historyState
+     const {data, popupState, showDetails, details} = historyState
      const isEmpty = useMemo(()=>data.length<=0,[data])
      return (
           <>
@@ -121,16 +127,16 @@ export default function HistoryContent(){
                                         </LoadingButton>
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent>
-                                        <DropdownMenuItem onClick={()=>setState({clearAll: true})} disabled={isEmpty}>
+                                        <DropdownMenuItem onClick={()=>setState({popupState: "clear-all"})} disabled={isEmpty}>
                                              {t("clear.all")}
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem onClick={()=>setState({clearAcknowledged: true})} disabled={isEmpty}>
+                                        <DropdownMenuItem onClick={()=>setState({popupState: "clear-acknowledged"})} disabled={isEmpty}>
                                              {t("clear.acknowledged")}
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem onClick={()=>setState({clearErrors: true})} disabled={isEmpty}>
+                                        <DropdownMenuItem onClick={()=>setState({popupState: "clear-errors"})} disabled={isEmpty}>
                                              {t("clear.errors")}
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem onClick={()=>setState({clearWarnings: true})} disabled={isEmpty} >
+                                        <DropdownMenuItem onClick={()=>setState({popupState: "clear-warnings"})} disabled={isEmpty} >
                                              {t("clear.warnings")}
                                         </DropdownMenuItem>
                                    </DropdownMenuContent>
@@ -143,45 +149,12 @@ export default function HistoryContent(){
                     )}
                />
           </div>
-          <Popup
-               open={clearAll}
-               onOpen={clearAll=>setState({clearAll})}
-               title={t("confirmation.clear-history.title")}
-               description={t("confirmation.clear-history.desc")}
-               submitTxt={t("confirmation.clear")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={()=>clearHistory(HistoryClearType.All)}
+          <ConfirmationMessage
+               state={popupState}
+               submitAction="clear"
+               submitEvent={handleConfirm}
                type="danger"
-          />
-          <Popup
-               open={clearAcknowledged}
-               onOpen={clearAcknowledged=>setState({clearAcknowledged})}
-               title={t("confirmation.clear-acknowledged.title")}
-               description={t("confirmation.clear-acknowledged.desc")}
-               submitTxt={t("confirmation.clear")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={()=>clearHistory(HistoryClearType.Acknowledged)}
-               type="danger"
-          />
-          <Popup
-               open={clearErrors}
-               onOpen={clearErrors=>setState({clearErrors})}
-               title={t("confirmation.clear-errors.title")}
-               description={t("confirmation.clear-errors.desc")}
-               submitTxt={t("confirmation.clear")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={()=>clearHistory(HistoryClearType.Error)}
-               type="danger"
-          />
-          <Popup
-               open={clearWarnings}
-               onOpen={clearWarnings=>setState({clearWarnings})}
-               title={t("confirmation.clear-warnings.title")}
-               description={t("confirmation.clear-warnings.desc")}
-               submitTxt={t("confirmation.clear")}
-               closeText={t("confirmation.cancel")}
-               submitEvent={()=>clearHistory(HistoryClearType.Warning)}
-               type="danger"
+               onOpenChange={(state)=>setState({ popupState: state as "" | HistoryConfirmationState })}
           />
           <Popup
                open={showDetails}

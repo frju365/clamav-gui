@@ -13,9 +13,6 @@ import { useScanProfile } from "@/hooks/use-scan-profile";
 import { SettingsProps } from "@/lib/types/props";
 import { RealTimeToggle } from "@/components/settings-item/real-time-toggler";
 import LoadingButton from "@/components/loading-button";
-import { IDangerZoneState } from "@/lib/types/states";
-import { INITIAL_DANGER_ZONE_STATE } from "@/lib/constants/states";
-import Popup from "@/components/popup";
 import { toast } from "sonner";
 import { store } from "@/lib/store";
 import SettingsOption from "@/components/settings-item/settings-option";
@@ -23,18 +20,18 @@ import { useTranslation } from "react-i18next";
 import { IBackendSettings, ScanOptionKeys } from "@/lib/types/settings";
 import { ObjectEntries } from "@/lib/helpers";
 import { ChoiceOption } from "@/components/settings-item/scan-option";
-import { ActionType } from "@/lib/types";
+import { ActionType, DangerZoneConfState } from "@/lib/types";
 import { isDescKey } from "@/lib/helpers/scan";
 import FolderPathFormLoader from "@/components/loaders/path-form";
 import FolderPathForm from "@/components/settings-item/path-form";
 import { useBackendSettings } from "@/hooks/use-settings";
+import ConfirmationMessage from "@/components/confirmation";
 
 export default function AdvancedSettings({scanProfile}: SettingsProps){
      const {settings, setSettings} = useSettings();
      const { values, setValue, isLoading } = useScanProfile(scanProfile);
      const [isPending, startTransition] = useTransition();
-     const [dangerZoneState, setDangerZoneState] = useState<IDangerZoneState>(INITIAL_DANGER_ZONE_STATE);
-
+     const [popupState, setPopupState] = useState<DangerZoneConfState | "">("")
      const [isFetching, startFetching] = useTransition()
      const {getSettingsByKey,setSettingsbyKey} = useBackendSettings()
      const [paths, setPaths] = useState<IBackendSettings["monitoringPaths"]>(DEFAULT_BACKEND_SETTINGS.monitoringPaths);
@@ -62,17 +59,13 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
           const newArr = action==="add" ? [...mainArr,value] : mainArr.filter(val=>val!==value)
           await updatePaths(newArr);
      }
-     const updateState = (overrides: Partial<IDangerZoneState>) => setDangerZoneState(prev=>({...prev,...overrides}));
      const visibleOptions = useMemo(()=>{
           const options = ObjectEntries(SCAN_SETTINGS).filter(([_,option])=>option.group==="advanced");
           return scanProfile === "file" ? options.filter(([k])=>FILE_SCAN_WHITELIST.includes(k as ScanOptionKeys)) : options;
      },[scanProfile])
      const handleDangerZoneAction = (type: ActionType) => {
           if (isPending) return;
-          updateState({
-               isOpenDelete: false,
-               isOpenRestore: false
-          });
+          setPopupState("")
           startTransition(async()=>{
                try {
                     if(type==="restore"){
@@ -88,6 +81,13 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                     });
                }
           })
+     }
+     const CLEAR_ACTIONS = {
+          "delete-settings": ()=>handleDangerZoneAction("delete"),
+          "restore-defaults": ()=>handleDangerZoneAction("restore")
+     } as const
+     const handleConfirm = () => {
+          if(popupState) CLEAR_ACTIONS[popupState]()
      }
      const {t: scanTxt} = useTranslation("scan-settings")
      const {t} = useTranslation("settings")
@@ -268,7 +268,7 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                               isLoading={isPending}
                               loaderText={t("danger-zone.pending")}
                               variant="destructive"
-                              onClick={()=>updateState({isOpenDelete: true})}
+                              onClick={()=>setPopupState("delete-settings")}
                          >
                               <Trash2/>
                               {t("danger-zone.delete.button")}
@@ -282,7 +282,7 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                               isLoading={isPending}
                               loaderText={t("danger-zone.pending")}
                               variant="destructive"
-                              onClick={()=>updateState({isOpenRestore: true})}
+                              onClick={()=>setPopupState("restore-defaults")}
                          >
                               <RotateCcw/>
                               {t("danger-zone.restore.button")}
@@ -290,24 +290,12 @@ export default function AdvancedSettings({scanProfile}: SettingsProps){
                     </SettingsOption>
                </SettingsItem>
           </div>
-          <Popup
-               open={dangerZoneState.isOpenDelete}
-               onOpen={isOpenDelete=>updateState({isOpenDelete})}
-               title={t("danger-zone.delete.confirmation")}
-               description={t("danger-zone.continue")}
-               closeText={t("danger-zone.cancel")}
-               submitTxt={t("danger-zone.delete.button")}
-               submitEvent={()=>handleDangerZoneAction("delete")}
-               type="danger"
-          />
-          <Popup
-               open={dangerZoneState.isOpenRestore}
-               onOpen={isOpenRestore=>updateState({isOpenRestore})}
-               title={t("danger-zone.restore.confirmation")}
-               description={t("danger-zone.continue")}
-               closeText={t("danger-zone.cancel")}
-               submitTxt={t("danger-zone.restore.button")}
-               submitEvent={()=>handleDangerZoneAction("restore")}
+          <ConfirmationMessage
+               state={popupState}
+               onOpenChange={(state)=>setPopupState(state as "" | DangerZoneConfState)}
+               submitAction={popupState==="delete-settings" ? "delete-settings" : popupState==="restore-defaults" ? "restore-defaults" : ""}
+               submitEvent={handleConfirm}
+               type={popupState==="delete-settings" ? "danger" : "default"}
           />
           </>
      )

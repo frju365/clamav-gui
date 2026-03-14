@@ -79,7 +79,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
   - [X] Replace the Update release notes part of the updater with a Changelog shortcut button
   - [X] Fix the No ClamAV Page appearing after a GUI Update (Experimental)
 - [X] Random Emoji Images on the "No ClamAV" Page after loading
-- [ ] Optimize Popup placements if it has over 2 Popup placements
+- [X] Optimize Popup placements if it has over 2 Popup placements
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
   - [ ] Clear last 24 hours
