@@ -16,7 +16,7 @@
                     "Click on \"Edit the system environment variables\".",
                     "Click on \"Environment Variables\" in the System Properties Window.",
                     "Find the <code>Path</code> variable, Click <bold>Edit</bold>, then add the output path of the <code>where clamscan</code> command.",
-                    "Click <bold>OK</bold>, then <bold>OK</bold>, <bold>Apply</bold>, then <bold>OK</bold>"
+                    "Click <bold>OK</bold>, then <bold>OK</bold>, <bold>Apply</bold>, and <bold>OK</bold>"
                ],
                "verification": "Verify by opening the Command Prompt, and typing:"
           },

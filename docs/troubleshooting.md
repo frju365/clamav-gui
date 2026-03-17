@@ -8,7 +8,50 @@
 
 <h1 align="center">Troubleshooting</h1>
 
-<!-- TODO: Write the Troubleshooting Guide -->
+## The ClamAV GUI shows "Oops, ClamAV has not been installed
+Make sure to Install ClamAV by following the installation guide here:
+https://docs.clamav.net/manual/Installing.html
+
+### Windows
+1. Open the Command Prompt, and type:
+   ```cmd
+   where clamscan
+   ```
+2. Once it returns the path, open the Start Menu, Type `env`
+3. Click on `Edit the system environment variables`
+4. Click on `Environment Variables` in the **System Properties** Window
+5. Find the `Path` variable, Click `Edit`, then add the output path of the `where clamscan` command
+6. Click **OK**, then **OK**, **Apply**, and **OK**
+7. Verify by opening the command prompt and typing:
+   ```cmd
+   clamscan --version
+   ```
+
+### Linux
+1. Open the preferred terminal, then type:
+   ```bash
+   which clamscan
+   ```
+2. Once it returns the path, open the `~/.bashrc` file with nano:
+   ```bash
+   sudo nano ~/.bashrc
+   ```
+3. Add the following snippet in the end of `~/.bashrc` file:
+   ```bash
+   export PATH="$PATH:/path/to/clamav/bin"
+   ```
+4. Press **Ctrl + S**, then **Ctrl + X**, reload the terminal by using:
+   ```bash
+   source ~/.bashrc
+   ```
+5. Verify by typing:
+   ```bash
+   clamscan --version
+   ```
+
+Once you installed ClamAV and added the ClamAV path into the `PATH` environment variable, click on the **Check Availability** button below to activate the ClamAV GUI for free
+
+<!-- TODO: Continue writing the Troubleshooting Guide once it has new info -->
 
 ---
 ### Navigation
