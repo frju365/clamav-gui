@@ -8,8 +8,8 @@
 
 <h1 align="center">Troubleshooting</h1>
 
-## The ClamAV GUI shows "Oops, ClamAV has not been installed"
-Make sure to Install ClamAV by following the installation guide here:
+## The ClamAV GUI shows "Oops, ClamAV has not been installed."
+Make sure to install ClamAV by following the installation guide here:
 https://docs.clamav.net/manual/Installing.html
 
 ### Windows
@@ -17,7 +17,7 @@ https://docs.clamav.net/manual/Installing.html
    ```cmd
    where clamscan
    ```
-2. Once it returns the path, open the Start Menu, Type `env`
+2. Once it returns the path, open the Start Menu, Type `env`.
 3. Click on `Edit the system environment variables`
 4. Click on `Environment Variables` in the **System Properties** Window
 5. Find the `Path` variable, Click `Edit`, then add the output path of the `where clamscan` command
@@ -36,7 +36,7 @@ https://docs.clamav.net/manual/Installing.html
    ```bash
    sudo nano ~/.bashrc
    ```
-3. Add the following snippet in the end of `~/.bashrc` file:
+3. Add the following snippet at the end of the `~/.bashrc` file:
    ```bash
    export PATH="$PATH:/path/to/clamav/bin"
    ```
@@ -49,8 +49,24 @@ https://docs.clamav.net/manual/Installing.html
    clamscan --version
    ```
 
-Once you installed ClamAV and added the ClamAV path into the `PATH` environment variable, click on the **Check Availability** button below to activate the ClamAV GUI for free
+Once you have installed ClamAV and added the ClamAV path to the `PATH` environment variable, click on the **Check Availability** button below to activate the ClamAV GUI for free
 
+---
+## Something wrong has happened after updating the GUI
+That error might happen because of leftover LocalStorage configurations
+
+1. Open the System Tray Menu
+2. Quit the ClamAV GUI
+3. Go to the cache folder
+   - **Windows** - Press **Win + R** key and type `%localappdata%`
+   - **Linux** - Open the preferred file explorer and go to `$HOME/.cache`
+4. Delete the `com.arsentech.clamav-gui` folder inside the Cache folder
+   - **Windows** - Delete `AppData/Local/com.arsentech.clamav-gui` folder
+   - **Linux** - `rm -rf ~/.cache/com.arsentech.clamav-gui` or delete from the preferred File Explorer
+5. Launch the app again
+
+> [!IMPORTANT]
+> This might delete settings configurations, so make sure to export these settings before updating the GUI and cleaning the cache, and once it's finished, import these settings into the GUI
 <!-- TODO: Continue writing the Troubleshooting Guide once it has new info -->
 
 ---
