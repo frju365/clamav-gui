@@ -52,7 +52,7 @@ https://docs.clamav.net/manual/Installing.html
 Once you have installed ClamAV and added the ClamAV path to the `PATH` environment variable, click on the **Check Availability** button below to activate the ClamAV GUI for free
 
 ---
-## Something wrong has happened after updating the GUI
+## I got a strange error page after launching the GUI, and it happens when I go to the specific page...
 That error might happen because of leftover LocalStorage configurations
 
 1. Open the System Tray Menu
@@ -66,7 +66,7 @@ That error might happen because of leftover LocalStorage configurations
 5. Launch the app again
 
 > [!IMPORTANT]
-> This might delete settings configurations, so make sure to export these settings before updating the GUI and cleaning the cache, and once it's finished, import these settings into the GUI
+> This might delete settings configurations, so make sure to export these settings before cleaning the cache, and once it's finished, import these settings into the GUI
 <!-- TODO: Continue writing the Troubleshooting Guide once it has new info -->
 
 ---
