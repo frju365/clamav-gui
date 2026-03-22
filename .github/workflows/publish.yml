@@ -75,7 +75,7 @@ jobs:
 
             [Add a changelog]
 
-            **Full Changelog:** [`clamav-gui/CHANGELOG.md`](https://github.com/ArsenTech/clamav-gui/blob/main/CHANGELOG.md)"
+            **Full Changelog:** [`clamav-gui/CHANGELOG.md`](https://github.com/ArsenTech/clamav-gui/blob/main/CHANGELOG.md)
 
             ---
 
@@ -108,3 +108,4 @@ jobs:
             [linux-rpm]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI-__VERSION__-1.x86_64.rpm
             [linux-app-image]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.AppImage
             [linux-deb]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.deb
+            
