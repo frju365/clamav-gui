@@ -66,8 +66,45 @@ jobs:
         with:
           tagName: v__VERSION__
           releaseName: "ClamAV GUI v__VERSION__"
-          releaseBody: "### Full Changelog: [`clamav-gui/CHANGELOG.md`](https://github.com/ArsenTech/clamav-gui/blob/main/CHANGELOG.md)"
           releaseDraft: true
           prerelease: false
           generateReleaseNotes: true
           args: ${{ matrix.args }}
+          releaseBody: |
+            ## What's Changed?
+
+            [Add a changelog]
+
+            **Full Changelog:** [`clamav-gui/CHANGELOG.md`](https://github.com/ArsenTech/clamav-gui/blob/main/CHANGELOG.md)"
+
+            ---
+
+            ## Downloads
+            ### :penguin: Linux
+            - **rpm** - [ClamAV.GUI-__VERSION__-1.x86_64.rpm][linux-rpm]
+            - **AppImage** - [ClamAV.GUI___VERSION___amd64.AppImage][linux-app-image]
+            - **deb** - [ClamAV.GUI___VERSION___amd64.deb][linux-deb]
+
+            ### :window: Windows
+            - **exe** - [ClamAV.GUI___VERSION___x64-setup.exe][windows-exe]
+            - **msi** - [ClamAV.GUI___VERSION___x64_en-US.msi][windows-msi]
+
+            ### :green_apple: macOS (ARM64)
+            - **dmg** - [ClamAV.GUI___VERSION___aarch64.dmg][mac-arm64-dmg]
+            - **app.tar.gz** - [ClamAV.GUI_aarch64.app.tar.gz][mac-arm64-tar]
+
+            ### :apple: macOS (x86)
+            - **dmg** - [ClamAV.GUI___VERSION___x64.dmg][mac-x64-dmg]
+            - **app.tar.gz** - [ClamAV.GUI_x64.app.tar.gz][mac-x64-tar]
+
+            [mac-arm64-dmg]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___aarch64.dmg
+            [mac-x64-dmg]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___x64.dmg
+            [mac-arm64-tar]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI_aarch64.app.tar.gz
+            [mac-x64-tar]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI_x64.app.tar.gz
+
+            [windows-exe]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___x64-setup.exe
+            [windows-msi]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___x64_en-US.msi
+
+            [linux-rpm]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI-__VERSION__-1.x86_64.rpm
+            [linux-app-image]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.AppImage
+            [linux-deb]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.deb
