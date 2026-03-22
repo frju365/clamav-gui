@@ -73,7 +73,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 - **Multilingual Support** - Use the ClamAV GUI in your native language besides English
 
 ### Planned Improvements
-- [] GUI Updater
+- [ ] GUI Updater
   - [ ] Add a feature to log the updater actions into the history
 - [ ] Backend Error Translation
 - [ ] New Clear History Options
