@@ -1,0 +1,54 @@
+{
+     "titles": "Podziękowania",
+     "credits-data": {
+          "coreTech": {
+               "title": "Technologie podstawowe",
+               "entries": [
+                    "ClamAV (silnik antywirusowy)",
+                    "ClamScan (skaner na żądanie)",
+                    "FreshClam (aktualizacje sygnatur)"
+               ]
+          },
+          "interface": {
+               "title": "Interfejs i platforma",
+               "entries": [
+                    "Tauri (środowisko uruchomieniowe desktop)",
+                    "React (UI/UX)",
+                    "Rust (backend i bezpieczeństwo)",
+                    "React Router (nawigacja)",
+                    "ShadCN UI (system designu)",
+                    "Tailwind CSS (stylowanie)",
+                    "Specta (typowane IPC)"
+               ]
+          },
+          "system": {
+               "title": "Integracja systemowa",
+               "entries": [
+                    "Harmonogram zadań Windows",
+                    "API zabezpieczeń Windows",
+                    "Zarządzanie procesami i sygnałami",
+                    "Integracja z linią poleceń (narzędzia ClamAV)"
+               ]
+          },
+          "ecosystem": {
+               "title": "Ekosystem open source",
+               "entries": [
+                    "Społeczność ClamAV",
+                    "Społeczność Tauri",
+                    "Ekosystem Rust",
+                    "Współtwórcy open source"
+               ]
+          }
+     },
+     "special-thanks": {
+          "title": "Specjalne podziękowania",
+          "notes": {
+               "early-test": "Wczesne testy i opinie",
+               "bug-report-test": "Zgłoszenia krytycznych błędów i testy w realnych warunkach"
+          },
+          "desc": {
+               "line1": "Specjalne podziękowania dla użytkowników, którzy testowali wersje przedpremierowe i zgłaszali problemy bezpośrednio.",
+               "line2": "Stworzone z szacunkiem dla użytkowników, prywatności i oprogramowania open source. <bold>Wykonane przez ArsenTech z pasją i zaufaniem</bold>"
+          }
+     }
+}
