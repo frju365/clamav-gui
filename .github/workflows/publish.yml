@@ -59,6 +59,7 @@ jobs:
 
       - name: "Build a Tauri App"
         uses: tauri-apps/tauri-action@v0
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
