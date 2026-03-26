@@ -64,6 +64,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
+          releaseId: ${{ github.ref_name }}
           tagName: v__VERSION__
           releaseName: "ClamAV GUI v__VERSION__"
           releaseDraft: true
@@ -108,4 +109,9 @@ jobs:
             [linux-rpm]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI-__VERSION__-1.x86_64.rpm
             [linux-app-image]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.AppImage
             [linux-deb]: https://github.com/ArsenTech/clamav-gui/releases/download/v__VERSION__/ClamAV.GUI___VERSION___amd64.deb
-            
+
+      - name: Test Build (PR / workflow_dispatch)
+        uses: tauri-apps/tauri-action@v0
+        if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+        with:
+          args: ${{ matrix.args }} --no-bundle
