@@ -9,7 +9,7 @@
      },
      "clamav-version": "ClamAV v{{engine}}, Wersja Bazy danych: {{dbVersion}}",
      "all-rights-reserved": "Wszelkie Prawa Zastrzezone",
-     "translated-by": "github.com/olek980",
+     "translated-by": "Tłumaczenie: [github.com/olek980](https://github.com/olek980)",
      "def-version": "Wersja bazy definicji wirusów",
      "buttons": {
           "bug-report": "Zreportuj Bug",

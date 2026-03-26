@@ -1,0 +1,17 @@
+{
+     "tray": {
+          "open": "",
+          "about": "",
+          "settings": "Ustawienia",
+          "scan": {
+               "title": "Skanowanie",
+               "main": "",
+               "full": "",
+               "custom": "",
+               "file": ""
+          },
+          "quit": "",
+          "update": "Aktualizacja",
+          "tooltip": ""
+     }
+}
