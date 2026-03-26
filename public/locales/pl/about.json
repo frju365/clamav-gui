@@ -1,6 +1,6 @@
 {
-     "title": "About ClamAV GUI",
-     "version": "Version {{version}}",
+     "title": "O ClamAV GUI",
+     "version": "Wersja {{version}}",
      "desc": {
           "line1": "Minimalistyczny interfejs typu open source do skanowania plików i wykrywania zagrożeń, dzięki któremu sam program antywirusowy wygląda profesjonalnie i działa dokładnie tak samo jak ClamAV (antywirus FOSS CLI).",
           "line2": "Zbudowany z wykorzystaniem Tauri, React oraz nowoczesnych narzędzi desktopowych i internetowych. Oprogramowanie jest udostępniane w stanie „jak jest”. Żadne dane nie są gromadzone ani przesyłane. Ten interfejs graficzny korzysta z silników <code>clamscan</code> i <code>freshclam</code> firmy ClamAV. Typy skanowania to ustawienia predefiniowane, które definiują używane lokalizacje i limity.",
