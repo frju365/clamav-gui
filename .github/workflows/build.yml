@@ -1,4 +1,4 @@
-name: 'Publish Release'
+name: "Build App Release"
 
 on:
   push:
@@ -25,6 +25,8 @@ jobs:
             args: '--target x86_64-apple-darwin'
           - platform: 'ubuntu-22.04'
             args: ''
+          - platform: 'ubuntu-24.04-arm'
+            args: ''
           - platform: 'windows-latest'
             args: ''
 
@@ -32,8 +34,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-22.04'
+      - name: Install dependencies (Ubuntu only)
+        if: startsWith(matrix.platform, 'ubuntu')
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -43,13 +45,13 @@ jobs:
             librsvg2-dev \
             patchelf
 
-      - name: setup node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'npm'
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
@@ -59,10 +61,10 @@ jobs:
         with:
           workspaces: './src-tauri -> target'
 
-      - name: install frontend dependencies
-        run: npm install
+      - name: Install frontend dependencies
+        run: npm ci
 
-      - name: "Build a Tauri App"
+      - name: Build and Publish Release
         uses: tauri-apps/tauri-action@v0
         if: startsWith(github.ref, 'refs/tags/v')
         env:
@@ -71,7 +73,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: v__VERSION__
-          releaseName: "ClamAV GUI v__VERSION__"
+          releaseName: 'ClamAV GUI v__VERSION__'
           releaseDraft: true
           prerelease: false
           generateReleaseNotes: true
