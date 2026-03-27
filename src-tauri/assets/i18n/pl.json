@@ -1,17 +1,17 @@
 {
      "tray": {
-          "open": "",
-          "about": "",
+          "open": "Otwórz GUI",
+          "about": "O ClamAV GUI",
           "settings": "Ustawienia",
           "scan": {
                "title": "Skanowanie",
-               "main": "",
-               "full": "",
-               "custom": "",
-               "file": ""
+               "main": "Skan szybki",
+               "full": "Pełne skanowanie",
+               "custom": "Skan niestandardowy",
+               "file": "Skan pliku"
           },
-          "quit": "",
+          "quit": "Wyjście",
           "update": "Aktualizacja",
-          "tooltip": ""
+          "tooltip": "ClamAV GUI działa w zasobniku systemowym"
      }
 }
