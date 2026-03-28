@@ -97,7 +97,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
 #### Maybe
 - [ ] Write the Documentation on the `docs/` folder.
   - [ ] Usage Guide
-  - [ ] Installation Guide
+  - [X] Installation Guide
   - [X] Troubleshooting
   - [ ] FAQs
 
