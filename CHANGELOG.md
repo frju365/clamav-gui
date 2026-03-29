@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Completed System Tray Translations
 ### Fixed
 - The Build workflow bug
+- System Tray ID name bug - Thanks [@frju365](https://github.com/frju365)!
 
 ## [1.0.3] - 2026-03-22
 ### Added
