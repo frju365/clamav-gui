@@ -43,7 +43,7 @@ pub fn generate_system_tray(app: &tauri::AppHandle) -> Result<TrayIcon, tauri::E
     let image_path = app.path().resolve(icon_path, tauri::path::BaseDirectory::Resource)?;
     let icon = Image::from_path(image_path).unwrap_or(app.default_window_icon().unwrap().clone());
 
-    TrayIconBuilder::with_id("main_tray")
+    TrayIconBuilder::with_id("clamav_gui_tray")
         .tooltip(t("tray.tooltip"))
         .icon(icon)
         .menu(&menu)
