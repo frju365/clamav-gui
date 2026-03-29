@@ -56,7 +56,7 @@
      },
      "scan": {
           "title": "Menaces par type d'analyse",
-          "main": "Analyse principale",
+          "main": "Analyse courante",
           "full": "Analyse complète",
           "custom": "Analyse personnalisée",
           "file": "Analyse de fichier",

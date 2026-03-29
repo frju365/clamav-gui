@@ -16,7 +16,7 @@
      },
      "scan-profile": {
           "title": "Profil d'analyse activé",
-          "main": "Analyse principale",
+          "main": "Analyse courante",
           "custom": "Analyse personnalisée",
           "file": "Analyse de fichier"
      },
@@ -90,7 +90,7 @@
      },
      "scan": {
           "title": "Paramètres d'analyse",
-          "desc": "Tous ces paramètres s'appliquent uniquement à l'Analyse principale, à l'Analyse personnalisée et à l'Analyse de fichier",
+          "desc": "Tous ces paramètres s'appliquent uniquement à l'Analyse courante, à l'Analyse personnalisée et à l'Analyse de fichier",
           "confirm-stop": {
                "title": "Confirmation d'arrêt du scan",
                "desc": "Afficher un message de confirmation quand on souhaite arrêter le scan."

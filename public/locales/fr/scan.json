@@ -8,7 +8,7 @@
      "scan-type": {
           "title": "Type d'analyse : {{scanType}}",
           "main": {
-               "name": "Analyse principale",
+               "name": "Analyse courante",
                "desc": "Vérifier les emplacements courants pour les fichiers malveillants"
           },
           "full": {
