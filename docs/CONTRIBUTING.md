@@ -116,16 +116,30 @@ If your changes affect the updater, release notes, or update flow, please test u
 3. Save it as `[lang-code]/[ns].json` (e.g. `fr/translations.json`, `el/scan.json`, `tr/quarantine.json`).
 4. Add your files to the `public/locales/` folder.
 5. Add the language entry in `src/i18n/config.ts`.
-      ```ts
-      export const languageOptions: languageOption[] = [
-            // All Existing Languages +
-            { language: "<native-name> (example: Español)", code: "<lang-code> (example: es)", countryCode: "<country-code> (example: mx)"},
-            // ^ This will be your contribution :-)
-      ];
-      ```
-6. Open `src-tauri/i18n/[lang-code].json` and Translate the backend using your preferred tool.
-7. Test by switching to your new language.
-8. Submit a PR for review!
+   ```ts
+   export const languageOptions: languageOption[] = [
+      // All Existing Languages +
+      { language: "<native-name> (example: Español)", code: "<lang-code> (example: es)", countryCode: "<country-code> (example: mx)"},
+      // ^ This will be your contribution :-)
+   ];
+   // ...
+   export const dateFnsLanguages: Record<LangCode,DateFnsLocale.Locale> = {
+      // All Existing Languages +
+      <lang-code>: DateFnsLocale.<lang-code>
+      // ^ This will also be your contribution :-)
+   }
+   ```
+6. Open `src-tauri/assets/i18n/[lang-code].json` and Translate the System tray using your preferred tool to finish the i18n support.
+   - Base Language - [`/src-tauri/assets/i18n/en.json`][link-to-systray-base-lang]
+7. Make sure to give yourself a credit.
+   Examples in other Languages:
+   - 🇷🇺 Russian: `Перевод на Русском: ArsenTech - https://github.com/ArsenTech`
+   - 🇦🇲 Armenian: `Թարգմանությունը՝ ArsenTech-ի - https://github.com/ArsenTech`
+   Make sure the credit for the translation is unique :-)
+8. Test by switching to your new language and tweaking some translations.
+9. Submit a PR for review!
+
+Once it's complete, your i18n contribution will be live!
 
 ## 💡 Feedback & Feature Requests
 We love new ideas! If you have a suggestion:
@@ -171,3 +185,4 @@ Thanks for making ArsenTech's ClamAV GUI better!
 [github-url]: https://github.com/ArsenTech
 [website-url]: https://arsentech.github.io
 [link-to-base-lang]: https://github.com/ArsenTech/clamav-gui/tree/main/public/locales/en
+[link-to-systray-base-lang]: https://github.com/ArsenTech/clamav-gui/blob/main/src-tauri/assets/i18n/en.json
