@@ -1,0 +1,55 @@
+{
+     
+     "titles": "Crédits",
+     "credits-data": {
+          "coreTech": {
+               "title": "Technologies principales",
+               "entries": [
+                    "ClamAV (Moteur Antivirus)",
+                    "ClamScan (Analyse à la demande)",
+                    "FreshClam (Mise à jour des signatures)"
+               ]
+          },
+          "interface": {
+               "title": "Interface & Plateforme",
+               "entries": [
+                    "Tauri (Runtime Desktop)",
+                    "React (UI/UX)",
+                    "Rust (Backend & Sécurité)",
+                    "React Router (Navigation)",
+                    "ShadCN UI (Design)",
+                    "Tailwind CSS (Styles)",
+                    "Specta (IPC Type-safe)"
+               ]
+          },
+          "system": {
+               "title": "Intégration Système",
+               "entries": [
+                    "Planificateur de tâches Windows",
+                    "API de sécurité Windows",
+                    "Gestion de processus et signaux",
+                    "Intégration en ligne de commande (commande ClamAV)"
+               ]
+          },
+          "ecosystem": {
+               "title": "Écosystème Open Source",
+               "entries": [
+                    "Communauté ClamAV",
+                    "Communauté Tauri",
+                    "Écosystème Rust",
+                    "Contributeurs Open Source"
+               ]
+          }
+     },
+     "special-thanks": {
+          "title": "Remerciements Spéciaux",
+          "notes": {
+               "early-test": "Tests et retours de bugs",
+               "bug-report-test": "Rapports de bugs critiques et tests en conditions réelles"
+          },
+          "desc": {
+               "line1": "Remerciements spéciaux aux utilisateurs qui ont testé les versions candidates et signalé des problèmes.",
+               "line2": "Construit avec respect pour les utilisateurs, la vie privée et les logiciels open source. <bold>Fait par ArsenTech avec amour et confiance</bold>"
+          }
+     }
+}
