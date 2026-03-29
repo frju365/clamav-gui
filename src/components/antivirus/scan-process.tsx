@@ -119,7 +119,7 @@ export default function ScanProcess({scanState, handleReset, isStartup}: Props){
                               <Clock className="text-primary"/>
                               {t("items.start-time")}
                          </h2>
-                         <code className="min-h-6">{formatDate(dateRef.current)}</code>
+                         <code className="min-h-6">{formatDate(dateRef.current.toISOString())}</code>
                     </div>
                     <Button className="flex-1" onClick={()=>settings.confirmStopScan ? setIsOpen(true) : handleStopScan()}><Square/> {t("stop-scan")}</Button>
                </div>

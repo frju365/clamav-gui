@@ -6,7 +6,7 @@ import { createContext, useContext, useState } from "react";
 interface SettingsContextValue{
      settings: ISettings,
      setSettings: (overrides: Partial<ISettings>) => void
-     formatDate: (date?: Date) => string
+     formatDate: (date?: string) => string
 }
 const SettingsContext = createContext<SettingsContextValue | null>(null)
 
@@ -20,8 +20,8 @@ export function SettingsProvider({ children }: { children: React.ReactNode }){
                return DEFAULT_SETTINGS
           }
      });
-     const formatDate = (date?: Date) => {
-          if(!date) return "Never"
+     const formatDate = (date?: string) => {
+          if(!date || date.trim()==="") return "Never"
           return format(date,settings.dateFormat)
      }
      const values: SettingsContextValue = {

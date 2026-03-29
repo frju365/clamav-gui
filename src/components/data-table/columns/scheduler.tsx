@@ -91,7 +91,7 @@ export const GET_SCHEDULER_COLS = (
           },
           cell: ({getValue}) => {
                const {formatDate} = useSettings();
-               return formatDate(new Date(getValue() as string))
+               return formatDate(getValue() as string)
           }
      },
      {
@@ -109,7 +109,7 @@ export const GET_SCHEDULER_COLS = (
           },
           cell: ({getValue}) => {
                const {formatDate} = useSettings();
-               return formatDate(new Date(getValue() as string))
+               return formatDate(getValue() as string)
           }
      },
      {

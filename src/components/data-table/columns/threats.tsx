@@ -51,7 +51,7 @@ export const GET_THREATS_COLS = (
                },
                cell: ({getValue}) => {
                     const {formatDate} = useSettings();
-                    return formatDate(new Date(getValue() as string))
+                    return formatDate(getValue() as string)
                }
           },
           {
