@@ -33,12 +33,10 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
 
-# Internationalization (i18n)
-
 ## Language Added
 - [ ] Language name:
 
-## Checklist
+## I18N Checklist
 - [ ] All keys translated
 - [ ] No keys removed
 - [ ] App tested locally
