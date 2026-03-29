@@ -1,0 +1,20 @@
+{
+     "title": "À propos de ClamAV GUI",
+     "version": "Version {{version}}",
+     "desc": {
+          "line1": "Une interface minimale et open-source pour l'analyse de fichiers et la détection de menaces qui rend l'antivirus professionnel et le fait fonctionner exactement comme ClamAV (un antivirus CLI FOSS).",
+          "line2": "Construit avec Tauri (Rust), React et des outils modernes. Ce logiciel est fourni tel quel. Aucune donnée n'est collectée ou transmise. Cette GUI utilise les moteurs <code>clamscan</code> et <code>freshclam</code> de ClamAV. Les types d'analyse sont des préréglages qui définissent quels emplacements et quelles limites sont utilisés.",
+          "line3": "ClamAV est une marque déposée par Cisco Systems, Inc. Ce projet est une GUI open-source indépendante et n'est ni affilié ni soutenu par Cisco.",
+          "line4": "Ce projet est communautaire. Vos retours sont bienvenus."
+     },
+     "clamav-version": "ClamAV v{{engine}}, Version de la base de données : {{dbVersion}}",
+     "all-rights-reserved": "Tous droits réservés",
+     "translated-by": "",
+     "def-version": "Version de la base de définitions de virus",
+     "buttons": {
+          "bug-report": "Signaler un bug",
+          "feature-request": "Demander une fonctionnalité",
+          "contribute": "Contribuer",
+          "translate": "Ajouter votre langue"
+     }
+}
