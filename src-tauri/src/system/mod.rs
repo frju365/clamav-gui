@@ -111,7 +111,7 @@ pub fn set_language(
 #[command]
 #[specta(result)]
 pub fn rebuild_tray(app: tauri::AppHandle) -> Result<(), String> {
-    app.remove_tray_by_id("main_tray");
+    app.remove_tray_by_id("clamav_ui_tray");
     generate_system_tray(&app).map_err(|e|e.to_string())?;
     Ok(())
 }
@@ -129,7 +129,7 @@ pub fn update_tray_icon(app: tauri::AppHandle, state: RealTimeState) -> Result<(
             .expect("Failed to load the icon"),
     };
     let icon = Image::from_path(icon_path).map_err(|e|e.to_string())?;
-    if let Some(tray) = app.tray_by_id("main_tray"){
+    if let Some(tray) = app.tray_by_id("clamav_ui_tray"){
         tray.set_icon(Some(icon)).map_err(|e|e.to_string())?
     }
     Ok(())
