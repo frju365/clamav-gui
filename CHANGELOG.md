@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## [1.0.4] - Unreleased
+### Added Languages
+- **🇵🇱 Polish** - Thanks [@Olek980](https://github.com/Olek980)!
+### Improved
+- Completed System Tray Translations
 ### Fixed
 - The Build workflow bug
 
