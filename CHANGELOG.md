@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Improved
 - Completed System Tray Translations on the 🇵🇱 Polish Translation
 - Optimized the function that returns date by a preferred format
+- Alignment on the Definitions Updater part of the Update Settings Tab
 ### Fixed
 - The Build workflow bug
 - System Tray ID name bug - Thanks [@frju365](https://github.com/frju365)!

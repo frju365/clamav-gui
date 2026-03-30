@@ -110,7 +110,7 @@ export default function UpdateSettings(){
                >
                     <div className="flex justify-center items-center gap-4">
                          <Icon className={cn("size-12",isRequired ? "text-destructive" : "text-emerald-600", (isUpdatingDefs || isInitializing) && "text-muted-foreground")}/>
-                         <div className="text-center space-y-0.5">
+                         <div className="text-center sm:text-left space-y-0.5">
                               <h2 className={cn(
                                    "text-xl md:text-2xl lg:text-3xl xl:text-[32px] font-semibold",
                                    isRequired && !isUpdatingDefs ? "text-red-900 dark:text-red-300" :
