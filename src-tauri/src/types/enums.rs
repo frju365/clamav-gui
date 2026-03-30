@@ -163,13 +163,6 @@ pub enum HistoryDetails{
     FileDelete {file_path: String},
     FileDeleteError {err: String, file_path: String}
 }
-#[derive(Serialize, Deserialize, Type, Debug, PartialEq, Eq, Hash, Copy, Clone)]
-#[serde(rename_all = "lowercase")]
-pub enum RealTimeState{
-    Enabled,
-    Disabled,
-    Default
-}
 
 #[derive(Serialize, Deserialize, Type, Debug, PartialEq, Eq, Hash, Copy, Clone)]
 #[serde(rename_all = "camelCase")]

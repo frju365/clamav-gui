@@ -1,17 +1,14 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use tauri::{
-    menu::{MenuBuilder, MenuItem, SubmenuBuilder},
-    tray::{TrayIcon, TrayIconBuilder},
-    Emitter, Manager,
-    image::Image
+    Emitter, Manager, Wry, image::Image, menu::{Menu, MenuBuilder, MenuItem, SubmenuBuilder}, tray::{TrayIcon, TrayIconBuilder}
 };
 use tauri_plugin_dialog::DialogExt;
 use crate::helpers::{i18n::t, real_time::REALTIME_ENABLED};
 
 pub static SHOULD_QUIT: AtomicBool = AtomicBool::new(false);
 
-pub fn generate_system_tray(app: &tauri::AppHandle) -> Result<TrayIcon, tauri::Error> {
+pub fn build_tray_menu(app: &tauri::AppHandle) -> Result<Menu<Wry>, tauri::Error> {
     let quit = MenuItem::with_id(app, "quit", t("tray.quit"), true, None::<&str>)?;
     let about = MenuItem::with_id(app, "about", t("tray.about"), true, None::<&str>)?;
     let open_ui = MenuItem::with_id(app, "open-ui", t("tray.open"), true, None::<&str>)?;
@@ -27,13 +24,17 @@ pub fn generate_system_tray(app: &tauri::AppHandle) -> Result<TrayIcon, tauri::E
         .items(&[&main_scan, &full_scan, &custom_scan, &file_scan])
         .build()?;
 
-    let menu = MenuBuilder::new(app)
+    MenuBuilder::new(app)
         .items(&[&open_ui, &about])
         .separator()
         .items(&[&settings, &scan, &update])
         .separator()
         .item(&quit)
-        .build()?;
+        .build()
+}
+
+pub fn generate_system_tray(app: &tauri::AppHandle) -> Result<TrayIcon, tauri::Error> {
+    let menu = build_tray_menu(app).map_err(|e|tauri::Error::from(e))?;
 
     let icon_path = if REALTIME_ENABLED.load(Ordering::Relaxed){
         "icons/green.png"
