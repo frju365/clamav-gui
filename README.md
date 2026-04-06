@@ -83,6 +83,7 @@ Built with Tauri, React, and modern desktop and web tools. This software is prov
   - [ ] Clear by date
 - [X] Fix the ARM64 build workflow
 - [X] Improve the date returning function
+- [ ] Optimize and clean few things
 #### v1.0.5 (Planned)
 - [ ] Backend Error Translation
 - [ ] Add a macOS Guide inside the **No ClamAV** Page
